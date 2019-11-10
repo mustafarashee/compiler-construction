@@ -1855,6 +1855,10 @@ bool OE1(linklist **start)
   }
   
 }
+bool if_else(linklist **start)
+{
+  
+}
   void print(linklist **start)
   {
     if (start == NULL)
