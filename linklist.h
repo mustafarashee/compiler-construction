@@ -2022,6 +2022,384 @@ bool while_st(linklist **start)
     return false;
   }
 }
+bool switch_st(linklist **start)
+{
+  linklist *curr = *start;
+  if(curr->cp=="switch")
+  {
+    curr=curr->next;
+    if(curr->cp=="(")
+    {
+      curr=curr->next;
+      if(OE(&curr))
+      {
+        if(curr->cp==")")
+        {
+          curr=curr->next;
+          if(curr->cp=="{")
+          {
+            curr=curr->next;
+            if(case_st(&curr))
+            {
+              if(default_st(&curr))
+              {
+                if(curr->cp=="}")
+                {
+                  curr=curr->next;
+                  return true;
+
+                }
+                else
+  {
+    return false;
+  }
+              }
+              else
+  {
+    return false;
+  }
+            }
+            else
+  {
+    return false;
+  }
+          }
+          else
+  {
+    return false;
+  }
+        }
+        else
+  {
+    return false;
+  }
+      }
+      else
+  {
+    return false;
+  }
+    }
+    else
+  {
+    return false;
+  }
+  }
+  else
+  {
+    return false;
+  }
+}
+bool case_st(linklist **start)
+{
+  linklist *curr = *start;
+  if(curr->cp=="case"||curr->cp=="default"||curr->cp=="}")
+  {
+    if(curr->cp=="case")
+    {
+      curr=curr->next;
+      if(OE(&curr))
+      {
+        if(curr->cp==":")
+        {
+          curr=curr->next;
+          if(curr->cp=="{")
+          {
+            curr=curr->next;
+            if(MST(&curr))
+            {
+              if(curr->cp=="}"){
+              curr=curr->next;
+              if(case_st(&curr))
+              {
+                return true;
+
+              }
+              else
+  {
+    return false;
+  }
+              }
+              else
+  {
+    return false;
+  }
+            }
+            else
+  {
+    return false;
+  }
+          }
+          else
+  {
+    return false;
+  }
+        }
+        else
+  {
+    return false;
+  }
+      }
+      else
+  {
+    return false;
+  }
+    }
+    else
+  {
+    return true;
+  }
+  }
+  else
+  {
+    return false;
+  }
+}
+bool default_st(linklist **start)
+{
+  linklist *curr = *start;
+  if(curr->cp=="default"||curr->cp=="}")
+  {
+    if(curr->cp=="default")
+    {
+      curr=curr->next;
+      if(curr->cp==":")
+      {
+        curr=curr->next;
+        if(curr->cp=="{")
+        {
+          curr=curr->next;
+          if(MST(&curr))
+          {
+            if(curr->cp=="}")
+            {
+              curr=curr->next;
+              return true;
+            }
+            else
+  {
+    return false;
+  }
+          }
+          else
+  {
+    return false;
+  }
+        }
+        else
+  {
+    return false;
+  }
+      }
+      else
+  {
+    return false;
+  }
+    }
+    else {
+      return true;
+    }
+  }
+  else
+  {
+    return false;
+  }
+}
+bool for_st(linklist **start)
+{
+  linklist *curr = *start;
+  if(curr->cp=="for")
+  {
+    curr=curr->next;
+    if(curr->cp=="(")
+    {
+      curr=curr->next;
+      if(C1(&curr))
+      {
+        if(C2(&curr))
+        {
+          if (curr->cp==";")
+          {
+            curr=curr->next;
+            if(C3(&curr))
+            {
+              if(curr->cp==")")
+              {
+                curr=curr->next;
+                if(curr->cp=="{")
+                {
+                  curr=curr->next;
+                  if(MST(&curr))
+                  {
+                    if(curr->cp=="}")
+                    {
+                      curr=curr->next;
+                      return true;
+                    }
+                    else
+  {
+    return false;
+  }
+                  }
+                  else
+  {
+    return false;
+  }
+                }
+                else
+  {
+    return false;
+  }
+              }
+              else
+  {
+    return false;
+  }
+            }
+            else
+  {
+    return false;
+  }
+          }
+          else
+  {
+    return false;
+  }
+          
+        }
+        else
+  {
+    return false;
+  }
+      }
+      else
+  {
+    return false;
+  }
+    }
+    else
+  {
+    return false;
+  }
+  }
+  else{
+    return false;
+  }
+}
+bool C1(linklist **start)
+{
+  linklist *curr = *start;
+  if(curr->cp=="DT"||curr->cp=="ID"||curr->cp==";")
+  {
+    if(curr->cp=="DT")
+    {
+      curr=curr->next;
+      if(curr->cp=="ID")
+      {
+        if(dt_dec(&curr))
+        {
+          return true;
+        }
+        else{
+    return false;
+  }
+      }
+      else{
+    return false;
+  }
+    }
+    else if(curr->cp=="ID")
+    {
+      curr=curr->next;
+      if(ass_st(&curr))
+      {
+        return true;
+      }
+      else{
+    return false;
+  }
+    }
+    else if(curr->cp==";")
+    {
+      curr=curr->next;
+      return true;
+    }
+  }
+  else{
+    return false;
+  }
+}
+bool C2(linklist **start)
+{
+  linklist *curr = *start;
+  if(curr->cp=="const"||curr->cp=="("||curr->cp==";"||curr->cp=="ID"||curr->cp=="!")
+  {
+    if(OE(&curr))
+    {
+      return true;
+    }
+    else
+    {
+      return true;
+    }
+    
+  }
+  else
+  {
+    return false;
+  }
+  
+}
+bool C3(linklist **start)
+{
+  linklist *curr = *start;
+  if(curr->cp=="ID"||curr->cp==")"||curr->cp=="inc_dec")
+  {
+    if(curr->cp=="ID")
+    {
+      curr=curr->next;
+      if(X11(&curr))
+      {
+        return true;
+      }
+      else {
+        return false;
+      }
+    }
+    else if(curr->cp=="inc_dec")
+    {
+      curr=curr->next;
+      return true;
+    }
+    else
+    {
+      return true;
+    }
+    
+  }
+  else{
+    return false;
+  }
+}
+bool X11(linklist **start)
+{
+  linklist *curr = *start;
+  if(curr->cp=="AOP"||curr->cp=="inc_dec")
+  {
+    if(ass_st(&curr))
+    {
+      return true;
+    }
+    else if (curr->cp=="inc_dec")
+    {
+      return true;
+    }
+    
+
+  }
+  else {
+    return false;
+  }
+}
   void print(linklist **start)
   {
     if (start == NULL)
