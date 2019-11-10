@@ -1,6 +1,6 @@
 #include <iostream>
 #include "WordBreak.h"
-#include "syntaxAnalyzer.h"git
+#include "syntaxAnalyzer.h"
 using namespace std;
 
 int main()
