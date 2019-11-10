@@ -1857,7 +1857,170 @@ bool OE1(linklist **start)
 }
 bool if_else(linklist **start)
 {
-  
+  linklist *curr = *start;
+  if(curr->cp=="if")
+  {
+    curr=curr->next;
+    if(curr->cp=="(")
+    {
+      curr=curr->next;
+      if(OE(&curr))
+      {
+        if(curr->cp==")")
+        {
+          curr=curr->next;
+          if(curr->cp=="{")
+          {
+            curr=curr->next;
+            if(MST(&curr))
+            {
+              if(curr->cp=="}")
+              {
+                curr=curr->next;
+                if(optional_else(&curr))
+                {
+                  return true;
+                }
+                 else
+                {
+                  return false;
+                  }
+                
+              }
+              else
+    {
+      return false;
+    }
+              
+            }
+            else
+    {
+      return false;
+    }
+          }
+          else
+  {
+    return false;
+  }
+        }
+        else
+  {
+    return false;
+  }
+      }
+      else
+  {
+    return false;
+  }
+    }
+    else
+  {
+    return false;
+  }
+  }
+  else
+  {
+    return false;
+  }
+}
+bool optional_else(linklist **start)
+{
+  linklist *curr = *start;
+  if(curr->cp=="else"||curr->cp=="if"||curr->cp=="switch"||curr->cp=="for"||curr->cp=="return"||curr->cp=="ID"||curr->cp=="DT"||curr->cp=="continue"||curr->cp=="break"||curr->cp=="}")
+  {
+    if(curr->cp=="else")
+    {
+    curr=curr->next;
+    if(curr->cp=="{")
+    {
+      curr=curr->next;
+      if(MST(&curr))
+      {
+        if (curr->cp=="}")
+        {
+          curr=curr->next;
+          return true;
+        }
+        else
+  {
+    return false;
+  }
+      }
+      else
+  {
+    return false;
+  }
+    }
+    else
+  {
+    return false;
+  }
+    }
+    else{
+      return true;
+    }
+
+  }
+}
+bool while_st(linklist **start)
+{
+  linklist *curr = *start;
+  if(curr->cp=="while")
+  {
+    curr=curr->next;
+    if(curr->cp=="(")
+    {
+      curr=curr->next;
+      if(OE(&curr))
+      {
+        if(curr->cp==")")
+        {
+          curr=curr->next;
+          if(curr->cp=="{")
+          {
+            curr=curr->next;
+            if(MST(&curr))
+            {
+              if(curr->cp=="}")
+              {
+                curr=curr->next;
+                return true;
+
+              }
+              else
+  {
+    return false;
+  }
+            }
+            else
+  {
+    return false;
+  }
+          }
+          else
+  {
+    return false;
+  }
+        }
+        else
+  {
+    return false;
+  }
+      }
+      else
+  {
+    return false;
+  }
+    }
+    else
+  {
+    return false;
+  }
+  }
+  else
+  {
+    return false;
+  }
 }
   void print(linklist **start)
   {
