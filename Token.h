@@ -208,7 +208,7 @@ public:
 
       else
       {
-        this->cp = "IDF";
+        this->cp = "ID";
         this->vp = word;
         settoken.cp = this->cp;
         settoken.vp = this->vp;
@@ -377,9 +377,13 @@ public:
        //syntaxAnalyzer syntax;
 
        //syntax.Analyzer(&start);
-       cout<<list.start(&start);
-
-       //list.print(&start);
+       cout<<"Tokens : "<<endl<<endl;
+       list.print(&start);
+      // cout<<list.start(&start);
+      cout<<endl<<endl<<"Syntax Analyzer :"<<endl<<endl;
+       bool check =true;
+       check = list.start(&start);
+       cout<<check<<endl; 
      // cout << " CP : " << this->cp << "  VP : " << this->vp << "  Line no:  " << this->lineno << endl;
     }
 
