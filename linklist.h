@@ -10,6 +10,8 @@ public:
   string vp;
   int lineno;
   linklist *next;
+  linklist **curr;
+
 
   void insert(string cp, string vp, int lineno, linklist **start)
   {
@@ -34,33 +36,36 @@ public:
     }
   }
 
-  bool start(linklist **start)
+
+
+  bool start(linklist **start )
   {
-    //linklist list1;
-    linklist *curr = *start;
-    if (curr->cp == "class" || curr->cp == "DT" || curr->cp == "ID" || curr->cp == "static" || curr->cp == "void" || curr->cp == "int")
+
+    curr = start;
+    
+    if ((*curr)->cp == "class" || (*curr)->cp == "DT" || (*curr)->cp == "ID" || (*curr)->cp == "static" || (*curr)->cp == "void" || (*curr)->cp == "int")
     {
-      if (defs(&curr))
+      if (defs())
       {
-        if (VI(&curr))
+        if (VI())
         {
-          if (curr->cp == "main")
+          if ((*curr)->cp == "main")
           {
-            curr = curr->next;
-            if (curr->cp == "(")
+            (*curr) = (*curr)->next;
+            if ((*curr)->cp == "(")
             {
-              curr = curr->next;
-              if (NV(&curr))
+              (*curr) = (*curr)->next;
+              if (NV())
               {
-                if (curr->cp == "{")
+                if ((*curr)->cp == "{")
                 {
-                  curr = curr->next;
-                  if (MST(&curr))
+                  (*curr) = (*curr)->next;
+                  if (MST())
                   {
-                    if (curr->cp == "}")
+                    if ((*curr)->cp == "}")
                     {
-                      curr = curr->next;
-                      if (curr->cp == "$")
+                      (*curr) = (*curr)->next;
+                      if ((*curr)->cp == "$")
                       {
                         cout << "File end" << endl;
                         return true;
@@ -76,318 +81,318 @@ public:
     }
     else
     {
-      cout << "Error syntax at:  " << curr->cp << endl;
+     // cout << "Error syntax at:  " << (*curr)->cp << endl;
       return false;
     }
   }
 
-  bool VI(linklist **start)
+  bool VI()
   {
-    linklist *curr = *start;
-    if (curr->cp == "void" || curr->cp == "DT")
+    
+    if ((*curr)->cp == "void" || (*curr)->cp == "DT")
     {
-      cout << "Curr value at top " << curr->cp << endl;
-      curr = curr->next;
+     // cout << "Curr value at top " << (*curr)->cp << endl;
+      (*curr) = (*curr)->next;
       return true;
     }
     else
     {
-      cout << "Error syntax at: " << curr->cp << endl;
+      cout << "Error syntax at: " << (*curr)->cp << endl;
       return false;
     }
   }
 
-  bool NV(linklist **start)
+  bool NV()
   {
-    linklist *curr = *start;
-    if (curr->cp == "void" || curr->cp == ")")
+    
+    if ((*curr)->cp == "void" || (*curr)->cp == ")")
     {
-      if (curr->cp == "void")
+      if ((*curr)->cp == "void")
       {
-        curr = curr->next;
+        (*curr) = (*curr)->next;
         return true;
       }
-      else if (curr->cp == ")")
+      else if ((*curr)->cp == ")")
       {
-        curr = curr->next;
+        (*curr) = (*curr)->next;
         return true;
       }
     }
     else
     {
-      cout << "Error syntax at: " << curr->cp << endl;
+      cout << "Error syntax at: " << (*curr)->cp << endl;
       return false;
     }
   }
-  bool defs(linklist **start)
+  bool defs()
   {
-    linklist *curr = *start;
-    if (curr->cp == "class" || curr->cp == "ID" || curr->cp == "DT" || curr->cp == "static" || curr->cp == "void" || curr->cp == "int")
+    
+    if ((*curr)->cp == "class" || (*curr)->cp == "ID" || (*curr)->cp == "DT" || (*curr)->cp == "static" || (*curr)->cp == "void" || (*curr)->cp == "int")
     {
-      if (classs(&curr))
+      if (classs())
       {
-        if (defs(&curr))
+        if (defs())
         {
           return true;
         }
       }
-      else if (curr->cp == "ID")
+      else if ((*curr)->cp == "ID")
       {
-        curr = curr->next;
-        if (defs1(&curr))
+        (*curr) = (*curr)->next;
+        if (defs1())
         {
-          if (defs(&curr))
+          if (defs())
           {
             return true;
           }
           else
           {
-            cout << "Error syntax at: " << curr->cp << endl;
+            cout << "Error syntax at: " << (*curr)->cp << endl;
             return false;
           }
         }
         else
         {
-          cout << "Error syntax at: " << curr->cp << endl;
+          cout << "Error syntax at: " << (*curr)->cp << endl;
           return false;
         }
       }
-      else if (curr->cp == "DT")
+      else if ((*curr)->cp == "DT")
       {
-        curr = curr->next;
-        if (curr->cp == "ID")
+        (*curr) = (*curr)->next;
+        if ((*curr)->cp == "ID")
         {
-          curr = curr->next;
-          if (defs2(&curr))
+          (*curr) = (*curr)->next;
+          if (defs2())
           {
-            if (defs(&curr))
+            if (defs())
             {
               return true;
             }
             else
             {
-              cout << "Error syntax at: " << curr->cp << endl;
+              cout << "Error syntax at: " << (*curr)->cp << endl;
               return false;
             }
           }
           else
           {
-            cout << "Error syntax at: " << curr->cp << endl;
+            cout << "Error syntax at: " << (*curr)->cp << endl;
             return false;
           }
         }
         else
         {
-          cout << "Error syntax at: " << curr->cp << endl;
+          cout << "Error syntax at: " << (*curr)->cp << endl;
           return false;
         }
       }
-      else if (curr->cp == "static")
+      else if ((*curr)->cp == "static")
       {
-        curr = curr->next;
-        if (type(&curr))
+        (*curr) = (*curr)->next;
+        if (type())
         {
-          if (curr->cp == ")")
+          if ((*curr)->cp == ")")
           {
-            curr = curr->next;
-            if (fun_dec(&curr))
+            (*curr) = (*curr)->next;
+            if (fun_dec())
             {
               return true;
             }
             else
             {
-              cout << "Error syntax at: " << curr->cp << endl;
+              cout << "Error syntax at: " << (*curr)->cp << endl;
               return false;
             }
           }
           else
           {
-            cout << "Error syntax at: " << curr->cp << endl;
+            cout << "Error syntax at: " << (*curr)->cp << endl;
             return false;
           }
         }
         else
         {
-          cout << "Error syntax at: " << curr->cp << endl;
+          cout << "Error syntax at: " << (*curr)->cp << endl;
           return false;
         }
       }
-      else if (curr->cp == "void" || curr->cp == "int") //jam
+      else if ((*curr)->cp == "void" || (*curr)->cp == "int") //jam
       {
-        cout << "Returnung void" << endl;
+        //cout << "Returnung void" << endl;
         return true;
       }
     }
     else
     {
-      cout << "Error syntax at: " << curr->cp << endl;
+      cout << "Error syntax at: " << (*curr)->cp << endl;
       return false;
     }
   }
-  bool classs(linklist **start)
+  bool classs()
   {
-    linklist *curr = *start;
-    if (curr->cp == "class")
+    
+    if ((*curr)->cp == "class")
     {
-      curr = curr->next;
-      if (curr->cp == "ID")
+      (*curr) = (*curr)->next;
+      if ((*curr)->cp == "ID")
       {
-        curr = curr->next;
-        if (check_inh(&curr))
+        (*curr) = (*curr)->next;
+        if (check_inh())
         {
-          if (curr->cp == "{")
+          if ((*curr)->cp == "{")
           {
-            curr = curr->next;
-            if (class_body(&curr))
+            (*curr) = (*curr)->next;
+            if (class_body())
             {
-              if (curr->cp == "}")
+              if ((*curr)->cp == "}")
               {
-                curr = curr->next;
-                if (curr->cp == ";")
+                (*curr) = (*curr)->next;
+                if ((*curr)->cp == ";")
                 {
-                  curr = curr->next;
+                  (*curr) = (*curr)->next;
                   return true;
                 }
                 else
                 {
-                  cout << "Error syntax at: " << curr->cp << endl;
+                  cout << "Error syntax at: " << (*curr)->cp << endl;
                   return false;
                 }
               }
               else
               {
-                cout << "Error syntax at: " << curr->cp << endl;
+                cout << "Error syntax at: " << (*curr)->cp << endl;
                 return false;
               }
             }
             else
             {
-              cout << "Error syntax at: " << curr->cp << endl;
+              cout << "Error syntax at: " << (*curr)->cp << endl;
               return false;
             }
           }
           else
           {
-            cout << "Error syntax at: " << curr->cp << endl;
+            cout << "Error syntax at: " << (*curr)->cp << endl;
             return false;
           }
         }
         else
         {
-          cout << "Error syntax at: " << curr->cp << endl;
+          cout << "Error syntax at: " << (*curr)->cp << endl;
           return false;
         }
       }
       else
       {
-        cout << "Error syntax at: " << curr->cp << endl;
+        cout << "Error syntax at: " << (*curr)->cp << endl;
         return false;
       }
     }
     else
     {
-      // cout<<"Error syntax at class: "<<curr->cp<<endl;
+      // cout<<"Error syntax at class: "<<(*curr)->cp<<endl;
       return false;
     }
   }
-  bool class_body(linklist **start)
+  bool class_body()
   {
-    linklist *curr = *start;
-    if (curr->cp == "ID" || curr->cp == "DT" || curr->cp == "AM" || curr->cp == "virtual" || curr->cp == "const" || curr->cp == "static" || curr->cp == "}")
+    
+    if ((*curr)->cp == "ID" || (*curr)->cp == "DT" || (*curr)->cp == "AM" || (*curr)->cp == "virtual" || (*curr)->cp == "const" || (*curr)->cp == "static" || (*curr)->cp == "}")
     {
-      if (curr->cp == "ID")
+      if ((*curr)->cp == "ID")
       {
-        curr = curr->next;
-        if (X1(&curr))
+        (*curr) = (*curr)->next;
+        if (X1())
         {
-          if (class_body(&curr))
+          if (class_body())
           {
             return true;
           }
           else
           {
-            cout << "Error syntax at: " << curr->cp << endl;
+            cout << "Error syntax at: " << (*curr)->cp << endl;
             return false;
           }
         }
         else
         {
-          cout << "Error syntax at: " << curr->cp << endl;
+          cout << "Error syntax at: " << (*curr)->cp << endl;
           return false;
         }
       }
-      else if (curr->cp == "DT")
+      else if ((*curr)->cp == "DT")
       {
-        curr = curr->next;
-        if (curr->cp == "ID")
+        (*curr) = (*curr)->next;
+        if ((*curr)->cp == "ID")
         {
-          curr = curr->next;
-          if (X2(&curr))
+          (*curr) = (*curr)->next;
+          if (X2())
           {
-            if (class_body(&curr))
+            if (class_body())
             {
               return true;
             }
             else
             {
-              cout << "Error syntax at: " << curr->cp << endl;
+              cout << "Error syntax at: " << (*curr)->cp << endl;
               return false;
             }
           }
           else
           {
-            cout << "Error syntax at: " << curr->cp << endl;
+            cout << "Error syntax at: " << (*curr)->cp << endl;
             return false;
           }
         }
       }
-      else if (curr->cp == "AM")
+      else if ((*curr)->cp == "AM")
       {
-        curr = curr->next;
-        if (curr->cp == ";")
+        (*curr) = (*curr)->next;
+        if ((*curr)->cp == ";")
         {
-          curr = curr->next;
-          if (class_body(&curr))
+          (*curr) = (*curr)->next;
+          if (class_body())
           {
             return true;
           }
           else
           {
-            cout << "Error syntax at: " << curr->cp << endl;
+            cout << "Error syntax at: " << (*curr)->cp << endl;
             return false;
           }
         }
         else
         {
-          cout << "Error syntax at: " << curr->cp << endl;
+          cout << "Error syntax at: " << (*curr)->cp << endl;
           return false;
         }
       }
-      else if (word(&curr))
+      else if (word())
       {
-        if (type(&curr))
+        if (type())
         {
-          if (curr->cp == "(")
+          if ((*curr)->cp == "(")
           {
-            curr = curr->next;
-            if (fun_dec(&curr))
+            (*curr) = (*curr)->next;
+            if (fun_dec())
             {
               return true;
             }
             else
             {
-              cout << "Error syntax at: " << curr->cp << endl;
+              cout << "Error syntax at: " << (*curr)->cp << endl;
               return false;
             }
           }
           else
           {
-            cout << "Error syntax at: " << curr->cp << endl;
+            cout << "Error syntax at: " << (*curr)->cp << endl;
             return false;
           }
         }
       }
-      else if (curr->cp == "}")
+      else if ((*curr)->cp == "}")
       {
         return true;
       }
@@ -398,72 +403,72 @@ public:
     }
     else
     {
-      cout << "Error syntax at: " << curr->cp << endl;
+      cout << "Error syntax at: " << (*curr)->cp << endl;
       return false;
     }
   }
-  bool word(linklist **start)
+  bool word()
   {
-    linklist *curr = *start;
+    
 
-    if (curr->cp == "virtual" || curr->cp == "const" || curr->cp == "static")
+    if ((*curr)->cp == "virtual" || (*curr)->cp == "const" || (*curr)->cp == "static")
     {
-      curr = curr->next;
+      (*curr) = (*curr)->next;
       return true;
     }
     else
     {
-      cout << "Error syntax at: " << curr->cp << endl;
+      cout << "Error syntax at: " << (*curr)->cp << endl;
       return false;
     }
   }
-  bool X1(linklist **start)
+  bool X1()
   {
-    linklist *curr = *start;
-    if (curr->cp == "(" || curr->cp == "ID")
+    
+    if ((*curr)->cp == "(" || (*curr)->cp == "ID")
     {
-      if (constructor_fn(&curr))
+      if (constructor_fn())
       {
         return true;
       }
-      else if (curr->cp == "ID")
+      else if ((*curr)->cp == "ID")
       {
-        curr = curr->next;
-        if (X3(&curr))
+        (*curr) = (*curr)->next;
+        if (X3())
         {
           return true;
         }
         else
         {
-          cout << "Error syntax at: " << curr->cp << endl;
+          cout << "Error syntax at: " << (*curr)->cp << endl;
           return false;
         }
       }
     }
     else
     {
-      cout << "Error syntax at: " << curr->cp << endl;
+      cout << "Error syntax at: " << (*curr)->cp << endl;
       return false;
     }
   }
-  bool constructor_fn(linklist **start)
+  bool constructor_fn()
   {
-    linklist *curr = *start;
-    if (curr->cp == "(")
+    
+    if ((*curr)->cp == "(")
     {
-      if (para(&curr))
+      if (para())
       {
-        if (curr->cp == ")")
+        if ((*curr)->cp == ")")
         {
-          curr = curr->next;
-          if (curr->cp == "{")
+          (*curr) = (*curr)->next;
+          if ((*curr)->cp == "{")
           {
-            curr = curr->next;
-            if (MST(&curr))
+            (*curr) = (*curr)->next;
+            if (MST())
             {
-              if (curr->cp == "}")
+              if ((*curr)->cp == "}")
               {
-                curr = curr->next;
+                (*curr) = (*curr)->next;
                 return true;
               }
             }
@@ -473,396 +478,396 @@ public:
     }
     else
     {
-      cout << "Error syntax at: " << curr->cp << endl;
+      cout << "Error syntax at: " << (*curr)->cp << endl;
       return false;
     }
   }
-  bool X2(linklist **start)
+  bool X2()
   {
-    linklist *curr = *start;
-    if (curr->cp == "[" || curr->cp == "(" || curr->cp == "AOP" || curr->cp == "," || curr->cp == ";")
+    
+    if ((*curr)->cp == "[" || (*curr)->cp == "(" || (*curr)->cp == "AOP" || (*curr)->cp == "," || (*curr)->cp == ";")
     {
-      if (curr->cp == "(")
+      if ((*curr)->cp == "(")
       {
-        curr = curr->next;
-        if (fun_dec(&curr))
+        (*curr) = (*curr)->next;
+        if (fun_dec())
         {
           return true;
         }
         else
         {
-          cout << "Error syntax at: " << curr->cp << endl;
+          cout << "Error syntax at: " << (*curr)->cp << endl;
           return false;
         }
       }
-      else if (dt_dec(&curr))
+      else if (dt_dec())
       {
         return true;
       }
     }
     else
     {
-      cout << "Error syntax at: " << curr->cp << endl;
+      cout << "Error syntax at: " << (*curr)->cp << endl;
       return false;
     }
   }
-  bool X3(linklist **start)
+  bool X3()
   {
-    linklist *curr = *start;
-    if (curr->cp == "[" || curr->cp == "(" || curr->cp == "ID" || curr->cp == "," || curr->cp == ";")
+    
+    if ((*curr)->cp == "[" || (*curr)->cp == "(" || (*curr)->cp == "ID" || (*curr)->cp == "," || (*curr)->cp == ";")
     {
-      if (curr->cp == "(")
+      if ((*curr)->cp == "(")
       {
-        curr = curr->next;
-        if (fun_dec(&curr))
+        (*curr) = (*curr)->next;
+        if (fun_dec())
         {
           return true;
         }
         else
         {
-          cout << "Error syntax at: " << curr->cp << endl;
+          cout << "Error syntax at: " << (*curr)->cp << endl;
           return false;
         }
       }
-      else if (obj_dec(&curr))
+      else if (obj_dec())
       {
         return true;
       }
       else
       {
-        cout << "Error syntax at: " << curr->cp << endl;
+        cout << "Error syntax at: " << (*curr)->cp << endl;
         return false;
       }
     }
     else
     {
-      cout << "Error syntax at: " << curr->cp << endl;
+      cout << "Error syntax at: " << (*curr)->cp << endl;
       return false;
     }
   }
-  bool defs1(linklist **start)
+  bool defs1()
   {
-    linklist *curr = *start;
-    if (curr->cp == "AOP" || curr->cp == "ID")
+    
+    if ((*curr)->cp == "AOP" || (*curr)->cp == "ID")
     {
-      if (ass_st(&curr))
+      if (ass_st())
       {
         return true;
       }
-      else if (curr->cp == "ID")
+      else if ((*curr)->cp == "ID")
       {
-        curr = curr->next;
-        if (X(&curr))
+        (*curr) = (*curr)->next;
+        if (X())
         {
           return true;
         }
         else
         {
-          cout << "Error syntax at: " << curr->cp << endl;
+          cout << "Error syntax at: " << (*curr)->cp << endl;
           return false;
         }
       }
       else
       {
-        cout << "Error syntax at: " << curr->cp << endl;
+        cout << "Error syntax at: " << (*curr)->cp << endl;
         return false;
       }
     }
     else
     {
-      cout << "Error syntax at: " << curr->cp << endl;
+      cout << "Error syntax at: " << (*curr)->cp << endl;
       return false;
     }
   }
-  bool X(linklist **start)
+  bool X()
   {
-    linklist *curr = *start;
-    if (curr->cp == "[" || curr->cp == "=" || curr->cp == ";" || curr->cp == "(" || curr->cp == ",")
+    
+    if ((*curr)->cp == "[" || (*curr)->cp == "=" || (*curr)->cp == ";" || (*curr)->cp == "(" || (*curr)->cp == ",")
     {
-      if (obj_dec(&curr))
+      if (obj_dec())
       {
         return true;
       }
-      else if (curr->cp == "(")
+      else if ((*curr)->cp == "(")
       {
-        curr = curr->next;
-        if (terminal(&curr))
+        (*curr) = (*curr)->next;
+        if (terminal())
         {
           return true;
         }
         else
         {
-          cout << "Error syntax at: " << curr->cp << endl;
+          cout << "Error syntax at: " << (*curr)->cp << endl;
           return false;
         }
       }
       else
       {
-        cout << "Error syntax at: " << curr->cp << endl;
+        cout << "Error syntax at: " << (*curr)->cp << endl;
         return false;
       }
     }
     else
     {
-      cout << "Error syntax at: " << curr->cp << endl;
+      cout << "Error syntax at: " << (*curr)->cp << endl;
       return false;
     }
   }
 
-  bool terminal(linklist **start)
+  bool terminal()
   {
-    linklist *curr = *start;
-    if (curr->cp == "[" || curr->cp == "=" || curr->cp == ";" || curr->cp == "(" || curr->cp == ",")
+    
+    if ((*curr)->cp == "[" || (*curr)->cp == "=" || (*curr)->cp == ";" || (*curr)->cp == "(" || (*curr)->cp == ",")
     {
-      if (fun_dec(&curr))
+      if (fun_dec())
       {
         return true;
       }
-      else if (constructor_dec(&curr))
+      else if (constructor_dec())
       {
         return true;
       }
       else
       {
-        cout << "Error syntax at: " << curr->cp << endl;
+        cout << "Error syntax at: " << (*curr)->cp << endl;
         return false;
       }
     }
     else
     {
-      cout << "Error syntax at: " << curr->cp << endl;
+      cout << "Error syntax at: " << (*curr)->cp << endl;
       return false;
     }
   }
-  bool defs2(linklist **start)
+  bool defs2()
   {
-    linklist *curr = *start;
-    if (curr->cp == "[" || curr->cp == "=" || curr->cp == ";" || curr->cp == "(" || curr->cp == ",")
+    
+    if ((*curr)->cp == "[" || (*curr)->cp == "=" || (*curr)->cp == ";" || (*curr)->cp == "(" || (*curr)->cp == ",")
     {
 
-      if (dt_dec(&curr))
+      if (dt_dec())
       {
         return true;
       }
-      else if (curr->cp == "(")
+      else if ((*curr)->cp == "(")
       {
-        curr = curr->next;
-        if (fun_dec(&curr))
+        (*curr) = (*curr)->next;
+        if (fun_dec())
         {
           return true;
         }
         else
         {
-          cout << "Error syntax at: " << curr->cp << endl;
+          cout << "Error syntax at: " << (*curr)->cp << endl;
           return false;
         }
       }
       else
       {
-        cout << "Error syntax at: " << curr->cp << endl;
+        cout << "Error syntax at: " << (*curr)->cp << endl;
         return false;
       }
     }
     else
     {
-      cout << "Error syntax at: " << curr->cp << endl;
+      cout << "Error syntax at: " << (*curr)->cp << endl;
       return false;
     }
   }
-  bool type(linklist **start)
+  bool type()
   {
-    linklist *curr = *start;
-    if (curr->cp == "ID" || curr->cp == "DT")
+    
+    if ((*curr)->cp == "ID" || (*curr)->cp == "DT")
     {
-      if (curr->cp == "ID")
+      if ((*curr)->cp == "ID")
       {
-        curr = curr->next;
-        if (curr->cp == "ID")
+        (*curr) = (*curr)->next;
+        if ((*curr)->cp == "ID")
         {
-          curr = curr->next;
+          (*curr) = (*curr)->next;
           return true;
         }
         else
         {
-          cout << "Error syntax at: " << curr->cp << endl;
+          cout << "Error syntax at: " << (*curr)->cp << endl;
           return false;
         }
       }
-      else if (curr->cp == "DT")
+      else if ((*curr)->cp == "DT")
       {
-        curr = curr->next;
-        if (curr->cp == "ID")
+        (*curr) = (*curr)->next;
+        if ((*curr)->cp == "ID")
         {
-          curr = curr->next;
+          (*curr) = (*curr)->next;
           return true;
         }
         else
         {
-          cout << "Error syntax at: " << curr->cp << endl;
+          cout << "Error syntax at: " << (*curr)->cp << endl;
           return false;
         }
       }
       else
       {
-        cout << "Error syntax at: " << curr->cp << endl;
+        cout << "Error syntax at: " << (*curr)->cp << endl;
         return false;
       }
     }
     else
     {
-      cout << "Error syntax at: " << curr->cp << endl;
+      cout << "Error syntax at: " << (*curr)->cp << endl;
       return false;
     }
   }
-  bool fun_dec(linklist **start)
+  bool fun_dec()
   {
-    linklist *curr = *start;
-    if (curr->cp == "ID" || curr->cp == "DT" || curr->cp == "void" || curr->cp == ")")
+    
+    if ((*curr)->cp == "ID" || (*curr)->cp == "DT" || (*curr)->cp == "void" || (*curr)->cp == ")")
     {
-      if (para(&curr))
+      if (para())
       {
-        if (curr->cp == ")")
+        if ((*curr)->cp == ")")
         {
-          curr = curr->next;
-          if (inherit(&curr))
+          (*curr) = (*curr)->next;
+          if (inherit())
           {
-            if (curr->cp == "{")
+            if ((*curr)->cp == "{")
             {
-              curr = curr->next;
-              if (MST(&curr))
+              (*curr) = (*curr)->next;
+              if (MST())
               {
-                if (curr->cp == "}")
+                if ((*curr)->cp == "}")
                 {
-                  curr = curr->next;
+                  (*curr) = (*curr)->next;
                   return true;
                 }
                 else
                 {
-                  cout << "Error syntax at: " << curr->cp << endl;
+                  cout << "Error syntax at: " << (*curr)->cp << endl;
                   return false;
                 }
               }
               else
               {
-                cout << "Error syntax at: " << curr->cp << endl;
+                cout << "Error syntax at: " << (*curr)->cp << endl;
                 return false;
               }
             }
             else
             {
-              cout << "Error syntax at: " << curr->cp << endl;
+              cout << "Error syntax at: " << (*curr)->cp << endl;
               return false;
             }
           }
           else
           {
-            cout << "Error syntax at: " << curr->cp << endl;
+            cout << "Error syntax at: " << (*curr)->cp << endl;
             return false;
           }
         }
         else
         {
-          cout << "Error syntax at: " << curr->cp << endl;
+          cout << "Error syntax at: " << (*curr)->cp << endl;
           return false;
         }
       }
       else
       {
-        cout << "Error syntax at: " << curr->cp << endl;
+        cout << "Error syntax at: " << (*curr)->cp << endl;
         return false;
       }
     }
     else
     {
-      cout << "Error syntax at: " << curr->cp << endl;
+      cout << "Error syntax at: " << (*curr)->cp << endl;
       return false;
     }
   }
-  bool inherit(linklist **start)
+  bool inherit()
   {
-    linklist *curr = *start;
-    if (curr->cp == ":")
+    
+    if ((*curr)->cp == ":")
     {
-      curr = curr->next;
-      if (curr->cp == "ID")
+      (*curr) = (*curr)->next;
+      if ((*curr)->cp == "ID")
       {
-        curr = curr->next;
-        if (fn_call1(&curr))
+        (*curr) = (*curr)->next;
+        if (fn_call1())
         {
           return true;
         }
         else
         {
-          cout << "Error syntax at: " << curr->cp << endl;
+          cout << "Error syntax at: " << (*curr)->cp << endl;
           return false;
         }
       }
       else
       {
-        cout << "Error syntax at: " << curr->cp << endl;
+        cout << "Error syntax at: " << (*curr)->cp << endl;
         return false;
       }
     }
     else
     {
-      cout << "Error syntax at: " << curr->cp << endl;
+      cout << "Error syntax at: " << (*curr)->cp << endl;
       return false;
     }
   }
-  bool def(linklist **start)
+  bool def()
   {
-    linklist *curr = *start;
-    if (curr->cp == "ID" || curr->cp == "DT")
+    
+    if ((*curr)->cp == "ID" || (*curr)->cp == "DT")
     {
-      if (curr->cp == "ID")
+      if ((*curr)->cp == "ID")
       {
-        curr = curr->next;
-        if (curr->cp == "ID")
+        (*curr) = (*curr)->next;
+        if ((*curr)->cp == "ID")
         {
-          curr = curr->next;
+          (*curr) = (*curr)->next;
           return true;
         }
         else
         {
-          cout << "Error syntax at: " << curr->cp << endl;
+          cout << "Error syntax at: " << (*curr)->cp << endl;
           return false;
         }
       }
-      else if (curr->cp == "DT")
+      else if ((*curr)->cp == "DT")
       {
-        curr = curr->next;
-        if (curr->cp == "ID")
+        (*curr) = (*curr)->next;
+        if ((*curr)->cp == "ID")
         {
-          curr = curr->next;
+          (*curr) = (*curr)->next;
           return true;
         }
         else
         {
-          cout << "Error syntax at: " << curr->cp << endl;
+          cout << "Error syntax at: " << (*curr)->cp << endl;
           return false;
         }
       }
     }
     else
     {
-      cout << "Error syntax at: " << curr->cp << endl;
+      cout << "Error syntax at: " << (*curr)->cp << endl;
       return false;
     }
   }
-  bool check_inh(linklist **start)
+  bool check_inh()
   {
-    linklist *curr = *start;
-    if (curr->cp == ":" || curr->cp == "{")
+    
+    if ((*curr)->cp == ":" || (*curr)->cp == "{")
     {
-      if (curr->cp == ":")
+      if ((*curr)->cp == ":")
       {
-        curr = curr->next;
-        if (curr->cp == "AM")
+        (*curr) = (*curr)->next;
+        if ((*curr)->cp == "AM")
         {
-          curr = curr->next;
-          if (curr->cp == "ID")
+          (*curr) = (*curr)->next;
+          if ((*curr)->cp == "ID")
           {
-            curr = curr->next;
+            (*curr) = (*curr)->next;
             return true;
           }
         }
@@ -874,30 +879,30 @@ public:
     }
     else
     {
-      cout << "Error syntax at: " << curr->cp << endl;
+      cout << "Error syntax at: " << (*curr)->cp << endl;
       return false;
     }
   }
-  bool para(linklist **start)
+  bool para()
   {
-    linklist *curr = *start;
-    if (curr->cp == "ID" || curr->cp == "DT" || curr->cp == "void" || curr->cp == ")")
+    
+    if ((*curr)->cp == "ID" || (*curr)->cp == "DT" || (*curr)->cp == "void" || (*curr)->cp == ")")
     {
-      if (def(&curr))
+      if (def())
       {
-        if (E(&curr))
+        if (E())
         {
           return true;
         }
         else
         {
-          cout << "Error syntax at: " << curr->cp << endl;
+          cout << "Error syntax at: " << (*curr)->cp << endl;
           return false;
         }
       }
-      else if (curr->cp == "void")
+      else if ((*curr)->cp == "void")
       {
-        curr = curr->next;
+        (*curr) = (*curr)->next;
         return true;
       }
       else
@@ -907,21 +912,21 @@ public:
     }
     else
     {
-      cout << "Error syntax at: " << curr->cp << endl;
+      cout << "Error syntax at: " << (*curr)->cp << endl;
       return false;
     }
   }
-  bool E(linklist **start)
+  bool E()
   {
-    linklist *curr = *start;
-    if (curr->cp == "," || curr->cp == ")")
+    
+    if ((*curr)->cp == "," || (*curr)->cp == ")")
     {
-      if (curr->cp == ",")
+      if ((*curr)->cp == ",")
       {
-        curr = curr->next;
-        if (def(&curr))
+        (*curr) = (*curr)->next;
+        if (def())
         {
-          if (E(&curr))
+          if (E())
           {
             return true;
           }
@@ -934,304 +939,304 @@ public:
     }
     else
     {
-      cout << "Error syntax at: " << curr->cp << endl;
+      cout << "Error syntax at: " << (*curr)->cp << endl;
       return false;
     }
   }
 
-  bool MST(linklist **start)
+  bool MST()
   {
-    linklist *curr = *start;
-    if (curr->cp == "if" || curr->cp == "while" || curr->cp == "switch" || curr->cp == "for" || curr->cp == "return" || curr->cp == "continue" || curr->cp == "break" || curr->cp == "ID" || curr->cp == "DT" || curr->cp == "}")
+    
+    if ((*curr)->cp == "if" || (*curr)->cp == "while" || (*curr)->cp == "switch" || (*curr)->cp == "for" || (*curr)->cp == "return" || (*curr)->cp == "continue" || (*curr)->cp == "break" || (*curr)->cp == "ID" || (*curr)->cp == "DT" || (*curr)->cp == "}")
     {
-      if (SST(&curr))
+      if (SST())
       {
-        if (MST(&curr))
+        if (MST())
         {
           return true;
         }
       }
-      else if (curr->cp == "}")
+      else if ((*curr)->cp == "}")
       {
         return true;
       }
     }
     else
     {
-      cout << "Error syntax at: " << curr->cp << endl;
+      cout << "Error syntax at: " << (*curr)->cp << endl;
       return false;
     }
   }
 
-  bool SST(linklist **start)
+  bool SST()
   {
-    linklist *curr = *start;
-    if (curr->cp == "if" || curr->cp == "while" || curr->cp == "switch" || curr->cp == "for" || curr->cp == "return" || curr->cp == "continue" || curr->cp == "break" || curr->cp == "ID" || curr->cp == "DT")
+    
+    if ((*curr)->cp == "if" || (*curr)->cp == "while" || (*curr)->cp == "switch" || (*curr)->cp == "for" || (*curr)->cp == "return" || (*curr)->cp == "continue" || (*curr)->cp == "break" || (*curr)->cp == "ID" || (*curr)->cp == "DT")
     {
-      if (if_else(&curr))
+      if (if_else())
       {
         return true;
       }
-      else if (while_st(&curr))
+      else if (while_st())
       {
         return true;
       }
-      else if (switch_st(&curr))
+      else if (switch_st())
       {
         return true;
       }
-      else if (for_st(&curr))
+      else if (for_st())
       {
         return true;
       }
-      else if (return_st(&curr))
+      else if (return_st())
       {
         return true;
       }
 
-      else if (curr->cp == "continue")
+      else if ((*curr)->cp == "continue")
       {
-        curr = curr->next;
-        if (curr->cp == ";")
+        (*curr) = (*curr)->next;
+        if ((*curr)->cp == ";")
         {
           return true;
         }
         else
         {
-          cout << "Error syntax at: " << curr->cp << endl;
+          cout << "Error syntax at: " << (*curr)->cp << endl;
           return false;
         }
       }
 
-      else if (curr->cp == "break")
+      else if ((*curr)->cp == "break")
       {
-        curr = curr->next;
-        if (curr->cp == ";")
+        (*curr) = (*curr)->next;
+        if ((*curr)->cp == ";")
         {
           return true;
         }
         else
         {
-          cout << "Error syntax at: " << curr->cp << endl;
+          cout << "Error syntax at: " << (*curr)->cp << endl;
           return false;
         }
       }
 
-      else if (curr->cp == "ID")
+      else if ((*curr)->cp == "ID")
       {
-        curr = curr->next;
-        if (SST1(&curr))
+        (*curr) = (*curr)->next;
+        if (SST1())
         {
           return true;
         }
         else
         {
-          cout << "Error syntax at: " << curr->cp << endl;
+          cout << "Error syntax at: " << (*curr)->cp << endl;
           return false;
         }
       }
 
-      else if (curr->cp == "DT")
+      else if ((*curr)->cp == "DT")
       {
-        curr = curr->next;
-        if (curr->cp == "ID")
+        (*curr) = (*curr)->next;
+        if ((*curr)->cp == "ID")
         {
-          curr = curr->next;
-          if (SST2(&curr))
+          (*curr) = (*curr)->next;
+          if (SST2())
           {
             return true;
           }
           else
           {
-            cout << "Error syntax at: " << curr->cp << endl;
+            cout << "Error syntax at: " << (*curr)->cp << endl;
             return false;
           }
         }
         else
         {
-          cout << "Error syntax at: " << curr->cp << endl;
+          cout << "Error syntax at: " << (*curr)->cp << endl;
           return false;
         }
       }
     }
     else
     {
-      cout << "Error syntax at: " << curr->cp << endl;
+      cout << "Error syntax at: " << (*curr)->cp << endl;
       return false;
     }
   }
-  bool dt_dec(linklist **start)
+  bool dt_dec()
   {
-    linklist *curr = *start;
-    if (curr->cp == "[" || curr->cp == "AOP" || curr->cp == "," || curr->cp == ";")
+    
+    if ((*curr)->cp == "[" || (*curr)->cp == "AOP" || (*curr)->cp == "," || (*curr)->cp == ";")
     {
-      if (new_array(&curr))
+      if (new_array())
       {
         return true;
       }
-      else if (init(&curr))
+      else if (init())
       {
         return true;
       }
       else
       {
-        cout << "Error syntax at: " << curr->cp << endl;
+        cout << "Error syntax at: " << (*curr)->cp << endl;
         return false;
       }
     }
     else
     {
-      cout << "Error syntax at: " << curr->cp << endl;
+      cout << "Error syntax at: " << (*curr)->cp << endl;
       return false;
     }
   }
-  bool new_array(linklist **start)
+  bool new_array()
   {
-    linklist *curr = *start;
-    if (curr->cp == "[")
+    
+    if ((*curr)->cp == "[")
     {
-      curr = curr->next;
-      if (OE(&curr))
+      (*curr) = (*curr)->next;
+      if (OE())
       {
-        if (curr->cp == "]")
+        if ((*curr)->cp == "]")
         {
-          curr = curr->next;
-          if (array2(&curr))
+          (*curr) = (*curr)->next;
+          if (array2())
           {
             return true;
           }
           else
           {
-            cout << "Error syntax at: " << curr->cp << endl;
+            cout << "Error syntax at: " << (*curr)->cp << endl;
             return false;
           }
         }
         else
         {
-          cout << "Error syntax at: " << curr->cp << endl;
+          cout << "Error syntax at: " << (*curr)->cp << endl;
           return false;
         }
       }
       else
       {
-        cout << "Error syntax at: " << curr->cp << endl;
+        cout << "Error syntax at: " << (*curr)->cp << endl;
         return false;
       }
     }
     else
     {
-      cout << "Error syntax at: " << curr->cp << endl;
+      cout << "Error syntax at: " << (*curr)->cp << endl;
       return false;
     }
   }
-  bool array2(linklist **start)
+  bool array2()
   {
-    linklist *curr = *start;
-    if (curr->cp == "=" || curr->cp == ";")
+    
+    if ((*curr)->cp == "=" || (*curr)->cp == ";")
     {
-      if (curr->cp == "=")
+      if ((*curr)->cp == "=")
       {
-        curr = curr->next;
-        if (curr->cp == "{")
+        (*curr) = (*curr)->next;
+        if ((*curr)->cp == "{")
         {
-          curr = curr->next;
-          if (array3(&curr))
+          (*curr) = (*curr)->next;
+          if (array3())
           {
-            if (curr->cp == "}")
+            if ((*curr)->cp == "}")
             {
-              curr = curr->next;
-              if (curr->cp == ";")
+              (*curr) = (*curr)->next;
+              if ((*curr)->cp == ";")
               {
                 return true;
               }
               else
               {
-                cout << "Error syntax at: " << curr->cp << endl;
+                cout << "Error syntax at: " << (*curr)->cp << endl;
                 return false;
               }
             }
             else
             {
-              cout << "Error syntax at: " << curr->cp << endl;
+              cout << "Error syntax at: " << (*curr)->cp << endl;
               return false;
             }
           }
           else
           {
-            cout << "Error syntax at: " << curr->cp << endl;
+            cout << "Error syntax at: " << (*curr)->cp << endl;
             return false;
           }
         }
         else
         {
-          cout << "Error syntax at: " << curr->cp << endl;
+          cout << "Error syntax at: " << (*curr)->cp << endl;
           return false;
         }
       }
-      else if (curr->cp == ";")
+      else if ((*curr)->cp == ";")
       {
-        curr = curr->next;
+        (*curr) = (*curr)->next;
         return true;
       }
     }
     else
     {
-      cout << "Error syntax at: " << curr->cp << endl;
+      cout << "Error syntax at: " << (*curr)->cp << endl;
       return false;
     }
   }
-  bool array3(linklist **start)
+  bool array3()
   {
-    linklist *curr = *start;
-    if (curr->cp == "const" || curr->cp == "ID" || curr->cp == "(" || curr->cp == "!")
+    
+    if ((*curr)->cp == "const" || (*curr)->cp == "ID" || (*curr)->cp == "(" || (*curr)->cp == "!")
     {
-      if (OE(&curr))
+      if (OE())
       {
-        if (array4(&curr))
+        if (array4())
         {
           return true;
         }
         else
         {
-          cout << "Error syntax at: " << curr->cp << endl;
+          cout << "Error syntax at: " << (*curr)->cp << endl;
           return false;
         }
       }
       else
       {
-        cout << "Error syntax at: " << curr->cp << endl;
+        cout << "Error syntax at: " << (*curr)->cp << endl;
         return false;
       }
     }
     else
     {
-      cout << "Error syntax at: " << curr->cp << endl;
+      cout << "Error syntax at: " << (*curr)->cp << endl;
       return false;
     }
   }
-  bool array4(linklist **start)
+  bool array4()
   {
-    linklist *curr = *start;
-    if (curr->cp == "," || curr->cp == "}")
+    
+    if ((*curr)->cp == "," || (*curr)->cp == "}")
     {
-      if (curr->cp == ",")
+      if ((*curr)->cp == ",")
       {
-        curr = curr->next;
-        if (OE(&curr))
+        (*curr) = (*curr)->next;
+        if (OE())
         {
-          if (array4(&curr))
+          if (array4())
           {
             return true;
           }
           else
           {
-            cout << "Error syntax at: " << curr->cp << endl;
+            cout << "Error syntax at: " << (*curr)->cp << endl;
             return false;
           }
         }
         else
         {
-          cout << "Error syntax at: " << curr->cp << endl;
+          cout << "Error syntax at: " << (*curr)->cp << endl;
           return false;
         }
       }
@@ -1242,95 +1247,95 @@ public:
     }
     else
     {
-      cout << "Error syntax at: " << curr->cp << endl;
+      cout << "Error syntax at: " << (*curr)->cp << endl;
       return false;
     }
   }
-  bool init(linklist **start)
+  bool init()
   {
-    linklist *curr = *start;
-    if (curr->cp == "AOP" || curr->cp == "," || curr->cp == ";")
+    
+    if ((*curr)->cp == "AOP" || (*curr)->cp == "," || (*curr)->cp == ";")
     {
-      if (curr->cp == "AOP")
+      if ((*curr)->cp == "AOP")
       {
-        curr = curr->next;
-        if (init2(&curr))
+        (*curr) = (*curr)->next;
+        if (init2())
         {
           return true;
         }
         else
         {
-          cout << "Error syntax at: " << curr->cp << endl;
+          cout << "Error syntax at: " << (*curr)->cp << endl;
           return false;
         }
       }
       else
       {
-        if (list(&curr))
+        if (list())
         {
           return true;
         }
         else
         {
-          cout << "Error syntax at: " << curr->cp << endl;
+          cout << "Error syntax at: " << (*curr)->cp << endl;
           return false;
         }
       }
     }
     else
     {
-      cout << "Error syntax at: " << curr->cp << endl;
+      cout << "Error syntax at: " << (*curr)->cp << endl;
       return false;
     }
   }
-  bool init2(linklist **start)
+  bool init2()
   {
-    linklist *curr = *start;
-    if (curr->cp == "const" || curr->cp == "(" || curr->cp == "ID" || curr->cp == "!")
+    
+    if ((*curr)->cp == "const" || (*curr)->cp == "(" || (*curr)->cp == "ID" || (*curr)->cp == "!")
     {
-      if (OE(&curr))
+      if (OE())
       {
-        if (curr->cp == ";")
+        if ((*curr)->cp == ";")
         {
           return true;
         }
         else
         {
-          cout << "Error syntax at: " << curr->cp << endl;
+          cout << "Error syntax at: " << (*curr)->cp << endl;
           return false;
         }
       }
-      else if (init4(&curr))
+      else if (init4())
       {
         return true;
       }
       else
       {
-        cout << "Error syntax at: " << curr->cp << endl;
+        cout << "Error syntax at: " << (*curr)->cp << endl;
         return false;
       }
     }
     else
     {
-      cout << "Error syntax at: " << curr->cp << endl;
+      cout << "Error syntax at: " << (*curr)->cp << endl;
       return false;
     }
   }
-  bool init3(linklist **start)
+  bool init3()
   {
-    linklist *curr = *start;
-    if (curr->cp == "AOP" || curr->cp == "," || curr->cp == ";")
+    
+    if ((*curr)->cp == "AOP" || (*curr)->cp == "," || (*curr)->cp == ";")
     {
-      if (curr->cp == "AOP")
+      if ((*curr)->cp == "AOP")
       {
-        curr = curr->next;
-        if (init4(&curr))
+        (*curr) = (*curr)->next;
+        if (init4())
         {
           return true;
         }
         else
         {
-          cout << "Error syntax at: " << curr->cp << endl;
+          cout << "Error syntax at: " << (*curr)->cp << endl;
           return false;
         }
       }
@@ -1341,159 +1346,159 @@ public:
     }
     else
     {
-      cout << "Error syntax at: " << curr->cp << endl;
+      cout << "Error syntax at: " << (*curr)->cp << endl;
       return false;
     }
   }
-  bool init4(linklist **start)
+  bool init4()
   {
-    linklist *curr = *start;
-    if (curr->cp == "ID" || curr->cp == "const")
+    
+    if ((*curr)->cp == "ID" || (*curr)->cp == "const")
     {
-      if (curr->cp == "ID")
+      if ((*curr)->cp == "ID")
       {
-        curr = curr->next;
-        if (init3(&curr))
+        (*curr) = (*curr)->next;
+        if (init3())
         {
-          if (list(&curr))
+          if (list())
           {
             return true;
           }
           else
           {
-            cout << "Error syntax at: " << curr->cp << endl;
+            cout << "Error syntax at: " << (*curr)->cp << endl;
             return false;
           }
         }
         else
         {
-          cout << "Error syntax at: " << curr->cp << endl;
+          cout << "Error syntax at: " << (*curr)->cp << endl;
           return false;
         }
       }
-      else if (curr->cp == "const")
+      else if ((*curr)->cp == "const")
       {
-        curr = curr->next;
-        if (list(&curr))
+        (*curr) = (*curr)->next;
+        if (list())
         {
           return true;
         }
         else
         {
-          cout << "Error syntax at: " << curr->cp << endl;
+          cout << "Error syntax at: " << (*curr)->cp << endl;
           return false;
         }
       }
       else
       {
-        cout << "Error syntax at: " << curr->cp << endl;
+        cout << "Error syntax at: " << (*curr)->cp << endl;
         return false;
       }
     }
     else
     {
-      cout << "Error syntax at: " << curr->cp << endl;
+      cout << "Error syntax at: " << (*curr)->cp << endl;
       return false;
     }
   }
-  bool list(linklist **start)
+  bool list()
   {
-    linklist *curr = *start;
-    if (curr->cp == "," || curr->cp == ";")
+    
+    if ((*curr)->cp == "," || (*curr)->cp == ";")
     {
-      if (curr->cp == ",")
+      if ((*curr)->cp == ",")
       {
-        curr = curr->next;
-        if (curr->cp == "ID")
+        (*curr) = (*curr)->next;
+        if ((*curr)->cp == "ID")
         {
-          curr = curr->next;
-          if (init3(&curr))
+          (*curr) = (*curr)->next;
+          if (init3())
           {
-            if (list(&curr))
+            if (list())
             {
               return true;
             }
             else
             {
-              cout << "Error syntax at: " << curr->cp << endl;
+              cout << "Error syntax at: " << (*curr)->cp << endl;
               return false;
             }
           }
           else
           {
-            cout << "Error syntax at: " << curr->cp << endl;
+            cout << "Error syntax at: " << (*curr)->cp << endl;
             return false;
           }
         }
       }
-      else if (curr->cp == ";")
+      else if ((*curr)->cp == ";")
       {
-        curr = curr->next;
+        (*curr) = (*curr)->next;
         return true;
       }
     }
     else
     {
-      cout << "Error syntax at: " << curr->cp << endl;
+      cout << "Error syntax at: " << (*curr)->cp << endl;
       return false;
     }
   }
-  bool obj_dec(linklist **start)
+  bool obj_dec()
   {
-    linklist *curr = *start;
-    if (curr->cp == "[" || curr->cp == "=" || curr->cp == "," || curr->cp == ";")
+    
+    if ((*curr)->cp == "[" || (*curr)->cp == "=" || (*curr)->cp == "," || (*curr)->cp == ";")
     {
-      if (array(&curr))
+      if (array())
       {
-        if (new_init(&curr))
+        if (new_init())
         {
-          if (list2(&curr))
+          if (list2())
           {
             return true;
           }
           else
           {
-            cout << "Error syntax at: " << curr->cp << endl;
+            cout << "Error syntax at: " << (*curr)->cp << endl;
             return false;
           }
         }
         else
         {
-          cout << "Error syntax at: " << curr->cp << endl;
+          cout << "Error syntax at: " << (*curr)->cp << endl;
           return false;
         }
       }
       else
       {
-        cout << "Error syntax at: " << curr->cp << endl;
+        cout << "Error syntax at: " << (*curr)->cp << endl;
         return false;
       }
     }
     else
     {
-      cout << "Error syntax at: " << curr->cp << endl;
+      cout << "Error syntax at: " << (*curr)->cp << endl;
       return false;
     }
   }
-  bool new_init(linklist **start)
+  bool new_init()
   {
-    linklist *curr = *start;
-    if (curr->cp == "ID" || curr->cp == "," || curr->cp == ";")
+    
+    if ((*curr)->cp == "ID" || (*curr)->cp == "," || (*curr)->cp == ";")
     {
-      if (curr->cp == "=")
+      if ((*curr)->cp == "=")
       {
 
-        curr = curr->next;
-        if (curr->cp == "ID")
+        (*curr) = (*curr)->next;
+        if ((*curr)->cp == "ID")
         {
-          curr = curr->next;
-          if (new_init(&curr))
+          (*curr) = (*curr)->next;
+          if (new_init())
           {
             return true;
           }
           else
           {
-            cout << "Error syntax at: " << curr->cp << endl;
+            cout << "Error syntax at: " << (*curr)->cp << endl;
             return false;
           }
         }
@@ -1509,90 +1514,90 @@ public:
     }
     else
     {
-      cout << "Error syntax at: " << curr->cp << endl;
+      cout << "Error syntax at: " << (*curr)->cp << endl;
       return false;
     }
   }
-  bool list2(linklist **start)
+  bool list2()
   {
-    linklist *curr = *start;
-    if (curr->cp == "," || curr->cp == ";")
+    
+    if ((*curr)->cp == "," || (*curr)->cp == ";")
     {
 
-      if (curr->cp == ",")
+      if ((*curr)->cp == ",")
       {
-        curr = curr->next;
-        if (curr->cp == "ID")
+        (*curr) = (*curr)->next;
+        if ((*curr)->cp == "ID")
         {
-          curr = curr->next;
-          if (array(&curr))
+          (*curr) = (*curr)->next;
+          if (array())
           {
-            if (new_init(&curr))
+            if (new_init())
             {
-              if (list2(&curr))
+              if (list2())
               {
                 return true;
               }
               else
               {
-                cout << "Error syntax at: " << curr->cp << endl;
+                cout << "Error syntax at: " << (*curr)->cp << endl;
                 return false;
               }
             }
             else
             {
-              cout << "Error syntax at: " << curr->cp << endl;
+              cout << "Error syntax at: " << (*curr)->cp << endl;
               return false;
             }
           }
           else
           {
-            cout << "Error syntax at: " << curr->cp << endl;
+            cout << "Error syntax at: " << (*curr)->cp << endl;
             return false;
           }
         }
         else
         {
-          cout << "Error syntax at: " << curr->cp << endl;
+          cout << "Error syntax at: " << (*curr)->cp << endl;
           return false;
         }
       }
-      else if (curr->cp == ";")
+      else if ((*curr)->cp == ";")
       {
         return true;
       }
     }
     else
     {
-      cout << "Error syntax at: " << curr->cp << endl;
+      cout << "Error syntax at: " << (*curr)->cp << endl;
       return false;
     }
   }
 
-  bool array(linklist **start)
+  bool array()
   {
-    linklist *curr = *start;
-    if (curr->cp == "[" || curr->cp == "." || curr->cp == "(" || curr->cp == "inc_dec" || curr->cp == "AOP")
+    
+    if ((*curr)->cp == "[" || (*curr)->cp == "." || (*curr)->cp == "(" || (*curr)->cp == "inc_dec" || (*curr)->cp == "AOP")
     {
-      if (curr->cp == "[")
+      if ((*curr)->cp == "[")
       {
-        curr = curr->next;
-        if (OE(&curr))
+        (*curr) = (*curr)->next;
+        if (OE())
         {
-          if (curr->cp == "]")
+          if ((*curr)->cp == "]")
           {
-            curr = curr->next;
+            (*curr) = (*curr)->next;
             return true;
           }
           else
           {
-            cout << "Error syntax at: " << curr->cp << endl;
+            cout << "Error syntax at: " << (*curr)->cp << endl;
             return false;
           }
         }
         else
         {
-          cout << "Error syntax at: " << curr->cp << endl;
+          cout << "Error syntax at: " << (*curr)->cp << endl;
           return false;
         }
       }
@@ -1603,207 +1608,207 @@ public:
     }
     else
     {
-      cout << "Error syntax at: " << curr->cp << endl;
+      cout << "Error syntax at: " << (*curr)->cp << endl;
       return false;
     }
   }
-  bool ass_st(linklist **start)
+  bool ass_st()
   {
-    linklist *curr = *start;
-    if (curr->cp == "AOP")
+    
+    if ((*curr)->cp == "AOP")
     {
-      if (ass_st1(&curr))
+      if (ass_st1())
       {
-        if (XX(&curr))
+        if (XX())
         {
           return true;
         }
         else
         {
-          cout << "Error syntax at: " << curr->cp << endl;
+          cout << "Error syntax at: " << (*curr)->cp << endl;
           return false;
         }
       }
       else
       {
-        cout << "Error syntax at: " << curr->cp << endl;
+        cout << "Error syntax at: " << (*curr)->cp << endl;
         return false;
       }
     }
     else
     {
-      cout << "Error syntax at: " << curr->cp << endl;
+      cout << "Error syntax at: " << (*curr)->cp << endl;
       return false;
     }
   }
-  bool ass_st1(linklist **start)
+  bool ass_st1()
   {
-    linklist *curr = *start;
-    if (curr->cp == "AOP")
+    
+    if ((*curr)->cp == "AOP")
     {
-      curr = curr->next;
-      if (OE(&curr))
+      (*curr) = (*curr)->next;
+      if (OE())
       {
         return true;
       }
       else
       {
-        cout << "Error syntax at: " << curr->cp << endl;
+        cout << "Error syntax at: " << (*curr)->cp << endl;
         return false;
       }
     }
     else
     {
-      cout << "Error syntax at: " << curr->cp << endl;
+      cout << "Error syntax at: " << (*curr)->cp << endl;
       return false;
     }
   }
-  bool XX(linklist **start)
+  bool XX()
   {
-    linklist *curr = *start;
-    if (curr->cp == "AOP" || curr->cp == ";")
+    
+    if ((*curr)->cp == "AOP" || (*curr)->cp == ";")
     {
-      if (ass_st1(&curr))
+      if (ass_st1())
       {
-        if (XX(&curr))
+        if (XX())
         {
           return true;
         }
         else
         {
-          cout << "Error syntax at: " << curr->cp << endl;
+          cout << "Error syntax at: " << (*curr)->cp << endl;
           return false;
         }
       }
-      else if (curr->cp == ";")
+      else if ((*curr)->cp == ";")
       {
         return true;
       }
     }
     else
     {
-      cout << "Error syntax at: " << curr->cp << endl;
+      cout << "Error syntax at: " << (*curr)->cp << endl;
       return false;
     }
   }
-  bool constructor_dec(linklist **start)
+  bool constructor_dec()
   {
-    linklist *curr = *start;
-    if (curr->cp == "const" || curr->cp == "(" || curr->cp == "ID" || curr->cp == "!" || curr->cp == ")")
+    
+    if ((*curr)->cp == "const" || (*curr)->cp == "(" || (*curr)->cp == "ID" || (*curr)->cp == "!" || (*curr)->cp == ")")
     {
-      if (arg(&curr))
+      if (arg())
       {
-        if (curr->cp == ")")
+        if ((*curr)->cp == ")")
         {
-          curr = curr->next;
-          if (curr->cp == ";")
+          (*curr) = (*curr)->next;
+          if ((*curr)->cp == ";")
           {
-            curr = curr->next;
+            (*curr) = (*curr)->next;
             return true;
           }
           else
           {
-            cout << "Error syntax at: " << curr->cp << endl;
+            cout << "Error syntax at: " << (*curr)->cp << endl;
             return false;
           }
         }
         else
         {
-          cout << "Error syntax at: " << curr->cp << endl;
+          cout << "Error syntax at: " << (*curr)->cp << endl;
           return false;
         }
       }
       else
       {
-        cout << "Error syntax at: " << curr->cp << endl;
+        cout << "Error syntax at: " << (*curr)->cp << endl;
         return false;
       }
     }
     else
     {
-      cout << "Error syntax at: " << curr->cp << endl;
+      cout << "Error syntax at: " << (*curr)->cp << endl;
       return false;
     }
   }
-  bool fn_call1(linklist **start)
+  bool fn_call1()
   {
-    linklist *curr = *start;
-    if (curr->cp == "." || curr->cp == ")")
+    
+    if ((*curr)->cp == "." || (*curr)->cp == ")")
     {
-      if (check_id(&curr))
+      if (check_id())
       {
-        if (curr->cp == "(")
+        if ((*curr)->cp == "(")
         {
-          curr = curr->next;
-          if (arg(&curr))
+          (*curr) = (*curr)->next;
+          if (arg())
           {
-            if (curr->cp == ")")
+            if ((*curr)->cp == ")")
             {
-              curr = curr->next;
+              (*curr) = (*curr)->next;
               return true;
             }
             else
             {
-              cout << "Error syntax at: " << curr->cp << endl;
+              cout << "Error syntax at: " << (*curr)->cp << endl;
               return false;
             }
           }
           else
           {
-            cout << "Error syntax at: " << curr->cp << endl;
+            cout << "Error syntax at: " << (*curr)->cp << endl;
             return false;
           }
         }
         else
         {
-          cout << "Error syntax at: " << curr->cp << endl;
+          cout << "Error syntax at: " << (*curr)->cp << endl;
           return false;
         }
       }
       else
       {
-        cout << "Error syntax at: " << curr->cp << endl;
+        cout << "Error syntax at: " << (*curr)->cp << endl;
         return false;
       }
     }
     else
     {
-      cout << "Error syntax at: " << curr->cp << endl;
+      cout << "Error syntax at: " << (*curr)->cp << endl;
       return false;
     }
   }
-  bool check_id(linklist **start)
+  bool check_id()
   {
-    linklist *curr = *start;
-    if (curr->cp == "." || curr->cp == "(")
+    
+    if ((*curr)->cp == "." || (*curr)->cp == "(")
     {
-      if (curr->cp == ".")
+      if ((*curr)->cp == ".")
       {
-        curr = curr->next;
-        if (curr->cp == "ID")
+        (*curr) = (*curr)->next;
+        if ((*curr)->cp == "ID")
         {
-          curr = curr->next;
-          if (array(&curr))
+          (*curr) = (*curr)->next;
+          if (array())
           {
-            if (check_id(&curr))
+            if (check_id())
             {
               return true;
             }
             else
             {
-              cout << "Error syntax at: " << curr->cp << endl;
+              cout << "Error syntax at: " << (*curr)->cp << endl;
               return false;
             }
           }
           else
           {
-            cout << "Error syntax at: " << curr->cp << endl;
+            cout << "Error syntax at: " << (*curr)->cp << endl;
             return false;
           }
         }
         else
         {
-          cout << "Error syntax at: " << curr->cp << endl;
+          cout << "Error syntax at: " << (*curr)->cp << endl;
           return false;
         }
       }
@@ -1814,24 +1819,24 @@ public:
     }
     else
     {
-      cout << "Error syntax at: " << curr->cp << endl;
+      cout << "Error syntax at: " << (*curr)->cp << endl;
       return false;
     }
   }
-  bool arg(linklist **start)
+  bool arg()
   {
-    linklist *curr = *start;
-    if (curr->cp == "const" || curr->cp == "(" || curr->cp == "ID" || curr->cp == "!" || curr->cp == ")")
+    
+    if ((*curr)->cp == "const" || (*curr)->cp == "(" || (*curr)->cp == "ID" || (*curr)->cp == "!" || (*curr)->cp == ")")
     {
-      if (OE(&curr))
+      if (OE())
       {
-        if (arg1(&curr))
+        if (arg1())
         {
           return true;
         }
         else
         {
-          cout << "Error syntax at: " << curr->cp << endl;
+          cout << "Error syntax at: " << (*curr)->cp << endl;
           return false;
         }
       }
@@ -1842,28 +1847,28 @@ public:
     }
     else
     {
-      cout << "Error syntax at: " << curr->cp << endl;
+      cout << "Error syntax at: " << (*curr)->cp << endl;
       return false;
     }
   }
-  bool arg1(linklist **start)
+  bool arg1()
   {
-    linklist *curr = *start;
-    if (curr->cp == "," || curr->cp == ")")
+    
+    if ((*curr)->cp == "," || (*curr)->cp == ")")
     {
-      if (curr->cp == ",")
+      if ((*curr)->cp == ",")
       {
-        curr = curr->next;
-        if (OE(&curr))
+        (*curr) = (*curr)->next;
+        if (OE())
         {
-          if (arg1(&curr))
+          if (arg1())
           {
             return true;
           }
         }
         else
         {
-          cout << "Error syntax at: " << curr->cp << endl;
+          cout << "Error syntax at: " << (*curr)->cp << endl;
           return false;
         }
       }
@@ -1874,205 +1879,205 @@ public:
     }
     else
     {
-      cout << "Error syntax at: " << curr->cp << endl;
+      cout << "Error syntax at: " << (*curr)->cp << endl;
       return false;
     }
   }
-  bool SST1(linklist **start)
+  bool SST1()
   {
-    linklist *curr = *start;
-    if (curr->cp == "[" || curr->cp == "." || curr->cp == "inc_dec" || curr->cp == "AOP" || curr->cp == "ID")
+    
+    if ((*curr)->cp == "[" || (*curr)->cp == "." || (*curr)->cp == "inc_dec" || (*curr)->cp == "AOP" || (*curr)->cp == "ID")
     {
-      if (array(&curr))
+      if (array())
       {
-        if (L2(&curr))
+        if (L2())
         {
           return true;
         }
         else
         {
-          cout << "Error syntax at: " << curr->cp << endl;
+          cout << "Error syntax at: " << (*curr)->cp << endl;
           return false;
         }
       }
-      else if (curr->cp == "ID")
+      else if ((*curr)->cp == "ID")
       {
-        curr = curr->next;
-        if (xxx(&curr))
+        (*curr) = (*curr)->next;
+        if (xxx())
         {
           return true;
         }
         else
         {
-          cout << "Error syntax at: " << curr->cp << endl;
+          cout << "Error syntax at: " << (*curr)->cp << endl;
           return false;
         }
       }
       else
       {
-        cout << "Error syntax at: " << curr->cp << endl;
+        cout << "Error syntax at: " << (*curr)->cp << endl;
         return false;
       }
     }
     else
     {
-      cout << "Error syntax at: " << curr->cp << endl;
+      cout << "Error syntax at: " << (*curr)->cp << endl;
       return false;
     }
   }
-  bool L2(linklist **start)
+  bool L2()
   {
-    linklist *curr = *start;
-    if (curr->cp == "." || curr->cp == "(" || curr->cp == "inc_dec" || curr->cp == "AOP" || curr->cp == "ID")
+    
+    if ((*curr)->cp == "." || (*curr)->cp == "(" || (*curr)->cp == "inc_dec" || (*curr)->cp == "AOP" || (*curr)->cp == "ID")
     {
-      if (fn_call(&curr))
+      if (fn_call())
       {
         return true;
       }
-      else if (curr->cp == "inc_dec")
+      else if ((*curr)->cp == "inc_dec")
       {
-        curr = curr->next;
-        if (curr->cp == ";")
+        (*curr) = (*curr)->next;
+        if ((*curr)->cp == ";")
         {
-          curr = curr->next;
+          (*curr) = (*curr)->next;
           return true;
         }
         else
         {
-          cout << "Error syntax at: " << curr->cp << endl;
+          cout << "Error syntax at: " << (*curr)->cp << endl;
           return false;
         }
       }
-      else if (ass_st(&curr))
+      else if (ass_st())
       {
         return true;
       }
       else
       {
-        cout << "Error syntax at: " << curr->cp << endl;
+        cout << "Error syntax at: " << (*curr)->cp << endl;
         return false;
       }
     }
     else
     {
-      cout << "Error syntax at: " << curr->cp << endl;
+      cout << "Error syntax at: " << (*curr)->cp << endl;
       return false;
     }
   }
-  bool xxx(linklist **start)
+  bool xxx()
   {
-    linklist *curr = *start;
-    if (curr->cp == "[" || curr->cp == "," || curr->cp == ";" || curr->cp == "ID" || curr->cp == "(")
+    
+    if ((*curr)->cp == "[" || (*curr)->cp == "," || (*curr)->cp == ";" || (*curr)->cp == "ID" || (*curr)->cp == "(")
     {
-      if (obj_dec(&curr))
+      if (obj_dec())
       {
         return true;
       }
-      else if (curr->cp == "(")
+      else if ((*curr)->cp == "(")
       {
-        curr = curr->next;
-        if (constructor_dec(&curr))
+        (*curr) = (*curr)->next;
+        if (constructor_dec())
         {
           return true;
         }
         else
         {
-          cout << "Error syntax at: " << curr->cp << endl;
+          cout << "Error syntax at: " << (*curr)->cp << endl;
           return false;
         }
       }
       else
       {
-        cout << "Error syntax at: " << curr->cp << endl;
+        cout << "Error syntax at: " << (*curr)->cp << endl;
         return false;
       }
     }
     else
     {
-      cout << "Error syntax at: " << curr->cp << endl;
+      cout << "Error syntax at: " << (*curr)->cp << endl;
       return false;
     }
   }
-  bool SST2(linklist **start)
+  bool SST2()
   {
 
-    linklist *curr = *start;
-    if (curr->cp == "AOP" || curr->cp == "[" || curr->cp == "," || curr->cp == ";")
+    
+    if ((*curr)->cp == "AOP" || (*curr)->cp == "[" || (*curr)->cp == "," || (*curr)->cp == ";")
     {
-      if (dt_dec(&curr))
+      if (dt_dec())
       {
         return true;
       }
       else
       {
-        cout << "Error syntax at: " << curr->cp << endl;
+        cout << "Error syntax at: " << (*curr)->cp << endl;
         return false;
       }
     }
     else
     {
-      cout << "Error syntax at: " << curr->cp << endl;
+      cout << "Error syntax at: " << (*curr)->cp << endl;
       return false;
     }
   }
-  bool fn_call(linklist **start)
+  bool fn_call()
   {
-    linklist *curr = *start;
-    if (curr->cp == "." || curr->cp == "(")
+    
+    if ((*curr)->cp == "." || (*curr)->cp == "(")
     {
-      if (fn_call1(&curr))
+      if (fn_call1())
       {
-        if (curr->cp == ";")
+        if ((*curr)->cp == ";")
         {
-          curr = curr->next;
+          (*curr) = (*curr)->next;
           return true;
         }
         else
         {
-          cout << "Error syntax at: " << curr->cp << endl;
+          cout << "Error syntax at: " << (*curr)->cp << endl;
           return false;
         }
       }
       else
       {
-        cout << "Error syntax at: " << curr->cp << endl;
+        cout << "Error syntax at: " << (*curr)->cp << endl;
         return false;
       }
     }
     else
     {
-      cout << "Error syntax at: " << curr->cp << endl;
+      cout << "Error syntax at: " << (*curr)->cp << endl;
       return false;
     }
   }
-  bool return_st(linklist **start)
+  bool return_st()
   {
-    linklist *curr = *start;
-    if (curr->cp == "return")
+    
+    if ((*curr)->cp == "return")
     {
-      curr = curr->next;
-      if (OE1(&curr))
+      (*curr) = (*curr)->next;
+      if (OE1())
       {
         return true;
       }
       else
       {
-        cout << "Error syntax at: " << curr->cp << endl;
+        cout << "Error syntax at: " << (*curr)->cp << endl;
         return false;
       }
     }
     else
     {
-      cout << "Error syntax at: " << curr->cp << endl;
+      cout << "Error syntax at: " << (*curr)->cp << endl;
       return false;
     }
   }
-  bool OE1(linklist **start)
+  bool OE1()
   {
-    linklist *curr = *start;
-    if (curr->cp == "const" || curr->cp == "!" || curr->cp == "ID" || curr->cp == "(" || curr->cp == ";")
+    
+    if ((*curr)->cp == "const" || (*curr)->cp == "!" || (*curr)->cp == "ID" || (*curr)->cp == "(" || (*curr)->cp == ";")
     {
-      if (OE(&curr))
+      if (OE())
       {
         return true;
       }
@@ -2083,117 +2088,117 @@ public:
     }
     else
     {
-      cout << "Error syntax at: " << curr->cp << endl;
+      cout << "Error syntax at: " << (*curr)->cp << endl;
       return false;
     }
   }
-  bool if_else(linklist **start)
+  bool if_else()
   {
-    linklist *curr = *start;
-    if (curr->cp == "if")
+    
+    if ((*curr)->cp == "if")
     {
-      curr = curr->next;
-      if (curr->cp == "(")
+      (*curr) = (*curr)->next;
+      if ((*curr)->cp == "(")
       {
-        curr = curr->next;
-        if (OE(&curr))
+        (*curr) = (*curr)->next;
+        if (OE())
         {
-          if (curr->cp == ")")
+          if ((*curr)->cp == ")")
           {
-            curr = curr->next;
-            if (curr->cp == "{")
+            (*curr) = (*curr)->next;
+            if ((*curr)->cp == "{")
             {
-              curr = curr->next;
-              if (MST(&curr))
+              (*curr) = (*curr)->next;
+              if (MST())
               {
-                if (curr->cp == "}")
+                if ((*curr)->cp == "}")
                 {
-                  curr = curr->next;
-                  if (optional_else(&curr))
+                  (*curr) = (*curr)->next;
+                  if (optional_else())
                   {
                     return true;
                   }
                   else
                   {
-                    cout << "Error syntax at: " << curr->cp << endl;
+                    cout << "Error syntax at: " << (*curr)->cp << endl;
                     return false;
                   }
                 }
                 else
                 {
-                  cout << "Error syntax at: " << curr->cp << endl;
+                  cout << "Error syntax at: " << (*curr)->cp << endl;
                   return false;
                 }
               }
               else
               {
-                cout << "Error syntax at: " << curr->cp << endl;
+                cout << "Error syntax at: " << (*curr)->cp << endl;
                 return false;
               }
             }
             else
             {
-              cout << "Error syntax at: " << curr->cp << endl;
+              cout << "Error syntax at: " << (*curr)->cp << endl;
               return false;
             }
           }
           else
           {
-            cout << "Error syntax at: " << curr->cp << endl;
+            cout << "Error syntax at: " << (*curr)->cp << endl;
             return false;
           }
         }
         else
         {
-          cout << "Error syntax at: " << curr->cp << endl;
+          cout << "Error syntax at: " << (*curr)->cp << endl;
           return false;
         }
       }
       else
       {
-        cout << "Error syntax at: " << curr->cp << endl;
+        cout << "Error syntax at: " << (*curr)->cp << endl;
         return false;
       }
     }
     else
     {
-      cout << "Error syntax at: " << curr->cp << endl;
+      cout << "Error syntax at: " << (*curr)->cp << endl;
       return false;
     }
   }
-  bool optional_else(linklist **start)
+  bool optional_else()
   {
-    linklist *curr = *start;
-    if (curr->cp == "else" || curr->cp == "if" || curr->cp == "switch" || curr->cp == "for" || curr->cp == "return" || curr->cp == "ID" || curr->cp == "DT" || curr->cp == "continue" || curr->cp == "break" || curr->cp == "}")
+    
+    if ((*curr)->cp == "else" || (*curr)->cp == "if" || (*curr)->cp == "switch" || (*curr)->cp == "for" || (*curr)->cp == "return" || (*curr)->cp == "ID" || (*curr)->cp == "DT" || (*curr)->cp == "continue" || (*curr)->cp == "break" || (*curr)->cp == "}")
     {
-      if (curr->cp == "else")
+      if ((*curr)->cp == "else")
       {
-        curr = curr->next;
-        if (curr->cp == "{")
+        (*curr) = (*curr)->next;
+        if ((*curr)->cp == "{")
         {
-          curr = curr->next;
-          if (MST(&curr))
+          (*curr) = (*curr)->next;
+          if (MST())
           {
-            if (curr->cp == "}")
+            if ((*curr)->cp == "}")
             {
-              curr = curr->next;
+              (*curr) = (*curr)->next;
               return true;
             }
             else
             {
-              cout << "Error syntax at: " << curr->cp << endl;
+              cout << "Error syntax at: " << (*curr)->cp << endl;
               return false;
             }
           }
           else
           {
-            cout << "Error syntax at: " << curr->cp << endl;
+            cout << "Error syntax at: " << (*curr)->cp << endl;
             return false;
           }
         }
         else
         {
-          cout << "Error syntax at: " << curr->cp << endl;
+          cout << "Error syntax at: " << (*curr)->cp << endl;
           return false;
         }
       }
@@ -2203,204 +2208,204 @@ public:
       }
     }
   }
-  bool while_st(linklist **start)
+  bool while_st()
   {
-    linklist *curr = *start;
-    if (curr->cp == "while")
+    
+    if ((*curr)->cp == "while")
     {
-      curr = curr->next;
-      if (curr->cp == "(")
+      (*curr) = (*curr)->next;
+      if ((*curr)->cp == "(")
       {
-        curr = curr->next;
-        if (OE(&curr))
+        (*curr) = (*curr)->next;
+        if (OE())
         {
-          if (curr->cp == ")")
+          if ((*curr)->cp == ")")
           {
-            curr = curr->next;
-            if (curr->cp == "{")
+            (*curr) = (*curr)->next;
+            if ((*curr)->cp == "{")
             {
-              curr = curr->next;
-              if (MST(&curr))
+              (*curr) = (*curr)->next;
+              if (MST())
               {
-                if (curr->cp == "}")
+                if ((*curr)->cp == "}")
                 {
-                  curr = curr->next;
+                  (*curr) = (*curr)->next;
                   return true;
                 }
                 else
                 {
-                  cout << "Error syntax at: " << curr->cp << endl;
+                  cout << "Error syntax at: " << (*curr)->cp << endl;
                   return false;
                 }
               }
               else
               {
-                cout << "Error syntax at: " << curr->cp << endl;
+                cout << "Error syntax at: " << (*curr)->cp << endl;
                 return false;
               }
             }
             else
             {
-              cout << "Error syntax at: " << curr->cp << endl;
+              cout << "Error syntax at: " << (*curr)->cp << endl;
               return false;
             }
           }
           else
           {
-            cout << "Error syntax at: " << curr->cp << endl;
+            cout << "Error syntax at: " << (*curr)->cp << endl;
             return false;
           }
         }
         else
         {
-          cout << "Error syntax at: " << curr->cp << endl;
+          cout << "Error syntax at: " << (*curr)->cp << endl;
           return false;
         }
       }
       else
       {
-        cout << "Error syntax at: " << curr->cp << endl;
+        cout << "Error syntax at: " << (*curr)->cp << endl;
         return false;
       }
     }
     else
     {
-      cout << "Error syntax at: " << curr->cp << endl;
+      cout << "Error syntax at: " << (*curr)->cp << endl;
       return false;
     }
   }
-  bool switch_st(linklist **start)
+  bool switch_st()
   {
-    linklist *curr = *start;
-    if (curr->cp == "switch")
+    
+    if ((*curr)->cp == "switch")
     {
-      curr = curr->next;
-      if (curr->cp == "(")
+      (*curr) = (*curr)->next;
+      if ((*curr)->cp == "(")
       {
-        curr = curr->next;
-        if (OE(&curr))
+        (*curr) = (*curr)->next;
+        if (OE())
         {
-          if (curr->cp == ")")
+          if ((*curr)->cp == ")")
           {
-            curr = curr->next;
-            if (curr->cp == "{")
+            (*curr) = (*curr)->next;
+            if ((*curr)->cp == "{")
             {
-              curr = curr->next;
-              if (case_st(&curr))
+              (*curr) = (*curr)->next;
+              if (case_st())
               {
-                if (default_st(&curr))
+                if (default_st())
                 {
-                  if (curr->cp == "}")
+                  if ((*curr)->cp == "}")
                   {
-                    curr = curr->next;
+                    (*curr) = (*curr)->next;
                     return true;
                   }
                   else
                   {
-                    cout << "Error syntax at: " << curr->cp << endl;
+                    cout << "Error syntax at: " << (*curr)->cp << endl;
                     return false;
                   }
                 }
                 else
                 {
-                  cout << "Error syntax at: " << curr->cp << endl;
+                  cout << "Error syntax at: " << (*curr)->cp << endl;
                   return false;
                 }
               }
               else
               {
-                cout << "Error syntax at: " << curr->cp << endl;
+                cout << "Error syntax at: " << (*curr)->cp << endl;
                 return false;
               }
             }
             else
             {
-              cout << "Error syntax at: " << curr->cp << endl;
+              cout << "Error syntax at: " << (*curr)->cp << endl;
               return false;
             }
           }
           else
           {
-            cout << "Error syntax at: " << curr->cp << endl;
+            cout << "Error syntax at: " << (*curr)->cp << endl;
             return false;
           }
         }
         else
         {
-          cout << "Error syntax at: " << curr->cp << endl;
+          cout << "Error syntax at: " << (*curr)->cp << endl;
           return false;
         }
       }
       else
       {
-        cout << "Error syntax at: " << curr->cp << endl;
+        cout << "Error syntax at: " << (*curr)->cp << endl;
         return false;
       }
     }
     else
     {
-      cout << "Error syntax at: " << curr->cp << endl;
+      cout << "Error syntax at: " << (*curr)->cp << endl;
       return false;
     }
   }
-  bool case_st(linklist **start)
+  bool case_st()
   {
-    linklist *curr = *start;
-    if (curr->cp == "case" || curr->cp == "default" || curr->cp == "}")
+    
+    if ((*curr)->cp == "case" || (*curr)->cp == "default" || (*curr)->cp == "}")
     {
-      if (curr->cp == "case")
+      if ((*curr)->cp == "case")
       {
-        curr = curr->next;
-        if (OE(&curr))
+        (*curr) = (*curr)->next;
+        if (OE())
         {
-          if (curr->cp == ":")
+          if ((*curr)->cp == ":")
           {
-            curr = curr->next;
-            if (curr->cp == "{")
+            (*curr) = (*curr)->next;
+            if ((*curr)->cp == "{")
             {
-              curr = curr->next;
-              if (MST(&curr))
+              (*curr) = (*curr)->next;
+              if (MST())
               {
-                if (curr->cp == "}")
+                if ((*curr)->cp == "}")
                 {
-                  curr = curr->next;
-                  if (case_st(&curr))
+                  (*curr) = (*curr)->next;
+                  if (case_st())
                   {
                     return true;
                   }
                   else
                   {
-                    cout << "Error syntax at: " << curr->cp << endl;
+                    cout << "Error syntax at: " << (*curr)->cp << endl;
                     return false;
                   }
                 }
                 else
                 {
-                  cout << "Error syntax at: " << curr->cp << endl;
+                  cout << "Error syntax at: " << (*curr)->cp << endl;
                   return false;
                 }
               }
               else
               {
-                cout << "Error syntax at: " << curr->cp << endl;
+                cout << "Error syntax at: " << (*curr)->cp << endl;
                 return false;
               }
             }
             else
             {
-              cout << "Error syntax at: " << curr->cp << endl;
+              cout << "Error syntax at: " << (*curr)->cp << endl;
               return false;
             }
           }
           else
           {
-            cout << "Error syntax at: " << curr->cp << endl;
+            cout << "Error syntax at: " << (*curr)->cp << endl;
             return false;
           }
         }
         else
         {
-          cout << "Error syntax at: " << curr->cp << endl;
+          cout << "Error syntax at: " << (*curr)->cp << endl;
           return false;
         }
       }
@@ -2411,52 +2416,52 @@ public:
     }
     else
     {
-      cout << "Error syntax at: " << curr->cp << endl;
+      cout << "Error syntax at: " << (*curr)->cp << endl;
       return false;
     }
   }
-  bool default_st(linklist **start)
+  bool default_st()
   {
-    linklist *curr = *start;
-    if (curr->cp == "default" || curr->cp == "}")
+    
+    if ((*curr)->cp == "default" || (*curr)->cp == "}")
     {
-      if (curr->cp == "default")
+      if ((*curr)->cp == "default")
       {
-        curr = curr->next;
-        if (curr->cp == ":")
+        (*curr) = (*curr)->next;
+        if ((*curr)->cp == ":")
         {
-          curr = curr->next;
-          if (curr->cp == "{")
+          (*curr) = (*curr)->next;
+          if ((*curr)->cp == "{")
           {
-            curr = curr->next;
-            if (MST(&curr))
+            (*curr) = (*curr)->next;
+            if (MST())
             {
-              if (curr->cp == "}")
+              if ((*curr)->cp == "}")
               {
-                curr = curr->next;
+                (*curr) = (*curr)->next;
                 return true;
               }
               else
               {
-                cout << "Error syntax at: " << curr->cp << endl;
+                cout << "Error syntax at: " << (*curr)->cp << endl;
                 return false;
               }
             }
             else
             {
-              cout << "Error syntax at: " << curr->cp << endl;
+              cout << "Error syntax at: " << (*curr)->cp << endl;
               return false;
             }
           }
           else
           {
-            cout << "Error syntax at: " << curr->cp << endl;
+            cout << "Error syntax at: " << (*curr)->cp << endl;
             return false;
           }
         }
         else
         {
-          cout << "Error syntax at: " << curr->cp << endl;
+          cout << "Error syntax at: " << (*curr)->cp << endl;
           return false;
         }
       }
@@ -2467,158 +2472,158 @@ public:
     }
     else
     {
-      cout << "Error syntax at: " << curr->cp << endl;
+      cout << "Error syntax at: " << (*curr)->cp << endl;
       return false;
     }
   }
-  bool for_st(linklist **start)
+  bool for_st()
   {
-    linklist *curr = *start;
-    if (curr->cp == "for")
+    
+    if ((*curr)->cp == "for")
     {
-      curr = curr->next;
-      if (curr->cp == "(")
+      (*curr) = (*curr)->next;
+      if ((*curr)->cp == "(")
       {
-        curr = curr->next;
-        if (C1(&curr))
+        (*curr) = (*curr)->next;
+        if (C1())
         {
-          if (C2(&curr))
+          if (C2())
           {
-            if (curr->cp == ";")
+            if ((*curr)->cp == ";")
             {
-              curr = curr->next;
-              if (C3(&curr))
+              (*curr) = (*curr)->next;
+              if (C3())
               {
-                if (curr->cp == ")")
+                if ((*curr)->cp == ")")
                 {
-                  curr = curr->next;
-                  if (curr->cp == "{")
+                  (*curr) = (*curr)->next;
+                  if ((*curr)->cp == "{")
                   {
-                    curr = curr->next;
-                    if (MST(&curr))
+                    (*curr) = (*curr)->next;
+                    if (MST())
                     {
-                      if (curr->cp == "}")
+                      if ((*curr)->cp == "}")
                       {
-                        curr = curr->next;
+                        (*curr) = (*curr)->next;
                         return true;
                       }
                       else
                       {
-                        cout << "Error syntax at: " << curr->cp << endl;
+                        cout << "Error syntax at: " << (*curr)->cp << endl;
                         return false;
                       }
                     }
                     else
                     {
-                      cout << "Error syntax at: " << curr->cp << endl;
+                      cout << "Error syntax at: " << (*curr)->cp << endl;
                       return false;
                     }
                   }
                   else
                   {
-                    cout << "Error syntax at: " << curr->cp << endl;
+                    cout << "Error syntax at: " << (*curr)->cp << endl;
                     return false;
                   }
                 }
                 else
                 {
-                  cout << "Error syntax at: " << curr->cp << endl;
+                  cout << "Error syntax at: " << (*curr)->cp << endl;
                   return false;
                 }
               }
               else
               {
-                cout << "Error syntax at: " << curr->cp << endl;
+                cout << "Error syntax at: " << (*curr)->cp << endl;
                 return false;
               }
             }
             else
             {
-              cout << "Error syntax at: " << curr->cp << endl;
+              cout << "Error syntax at: " << (*curr)->cp << endl;
               return false;
             }
           }
           else
           {
-            cout << "Error syntax at: " << curr->cp << endl;
+            cout << "Error syntax at: " << (*curr)->cp << endl;
             return false;
           }
         }
         else
         {
-          cout << "Error syntax at: " << curr->cp << endl;
+          cout << "Error syntax at: " << (*curr)->cp << endl;
           return false;
         }
       }
       else
       {
-        cout << "Error syntax at: " << curr->cp << endl;
+        cout << "Error syntax at: " << (*curr)->cp << endl;
         return false;
       }
     }
     else
     {
-      cout << "Error syntax at: " << curr->cp << endl;
+      cout << "Error syntax at: " << (*curr)->cp << endl;
       return false;
     }
   }
-  bool C1(linklist **start)
+  bool C1()
   {
-    linklist *curr = *start;
-    if (curr->cp == "DT" || curr->cp == "ID" || curr->cp == ";")
+    
+    if ((*curr)->cp == "DT" || (*curr)->cp == "ID" || (*curr)->cp == ";")
     {
-      if (curr->cp == "DT")
+      if ((*curr)->cp == "DT")
       {
-        curr = curr->next;
-        if (curr->cp == "ID")
+        (*curr) = (*curr)->next;
+        if ((*curr)->cp == "ID")
         {
-          if (dt_dec(&curr))
+          if (dt_dec())
           {
             return true;
           }
           else
           {
-            cout << "Error syntax at: " << curr->cp << endl;
+            cout << "Error syntax at: " << (*curr)->cp << endl;
             return false;
           }
         }
         else
         {
-          cout << "Error syntax at: " << curr->cp << endl;
+          cout << "Error syntax at: " << (*curr)->cp << endl;
           return false;
         }
       }
-      else if (curr->cp == "ID")
+      else if ((*curr)->cp == "ID")
       {
-        curr = curr->next;
-        if (ass_st(&curr))
+        (*curr) = (*curr)->next;
+        if (ass_st())
         {
           return true;
         }
         else
         {
-          cout << "Error syntax at: " << curr->cp << endl;
+          cout << "Error syntax at: " << (*curr)->cp << endl;
           return false;
         }
       }
-      else if (curr->cp == ";")
+      else if ((*curr)->cp == ";")
       {
-        curr = curr->next;
+        (*curr) = (*curr)->next;
         return true;
       }
     }
     else
     {
-      cout << "Error syntax at: " << curr->cp << endl;
+      cout << "Error syntax at: " << (*curr)->cp << endl;
       return false;
     }
   }
-  bool C2(linklist **start)
+  bool C2()
   {
-    linklist *curr = *start;
-    if (curr->cp == "const" || curr->cp == "(" || curr->cp == ";" || curr->cp == "ID" || curr->cp == "!")
+    
+    if ((*curr)->cp == "const" || (*curr)->cp == "(" || (*curr)->cp == ";" || (*curr)->cp == "ID" || (*curr)->cp == "!")
     {
-      if (OE(&curr))
+      if (OE())
       {
         return true;
       }
@@ -2629,31 +2634,31 @@ public:
     }
     else
     {
-      cout << "Error syntax at: " << curr->cp << endl;
+      cout << "Error syntax at: " << (*curr)->cp << endl;
       return false;
     }
   }
-  bool C3(linklist **start)
+  bool C3()
   {
-    linklist *curr = *start;
-    if (curr->cp == "ID" || curr->cp == ")" || curr->cp == "inc_dec")
+    
+    if ((*curr)->cp == "ID" || (*curr)->cp == ")" || (*curr)->cp == "inc_dec")
     {
-      if (curr->cp == "ID")
+      if ((*curr)->cp == "ID")
       {
-        curr = curr->next;
-        if (X11(&curr))
+        (*curr) = (*curr)->next;
+        if (X11())
         {
           return true;
         }
         else
         {
-          cout << "Error syntax at: " << curr->cp << endl;
+          cout << "Error syntax at: " << (*curr)->cp << endl;
           return false;
         }
       }
-      else if (curr->cp == "inc_dec")
+      else if ((*curr)->cp == "inc_dec")
       {
-        curr = curr->next;
+        (*curr) = (*curr)->next;
         return true;
       }
       else
@@ -2663,245 +2668,245 @@ public:
     }
     else
     {
-      cout << "Error syntax at: " << curr->cp << endl;
+      cout << "Error syntax at: " << (*curr)->cp << endl;
       return false;
     }
   }
-  bool X11(linklist **start)
+  bool X11()
   {
-    linklist *curr = *start;
-    if (curr->cp == "AOP" || curr->cp == "inc_dec")
+    
+    if ((*curr)->cp == "AOP" || (*curr)->cp == "inc_dec")
     {
-      if (ass_st(&curr))
+      if (ass_st())
       {
         return true;
       }
-      else if (curr->cp == "inc_dec")
+      else if ((*curr)->cp == "inc_dec")
       {
         return true;
       }
     }
     else
     {
-      cout << "Error syntax at: " << curr->cp << endl;
+      cout << "Error syntax at: " << (*curr)->cp << endl;
       return false;
     }
   }
 
-  bool OE(linklist **start)
+  bool OE()
   {
-    linklist *curr = *start;
-    if (curr->cp == "const" || curr->cp == "(" || curr->cp == "!" || curr->cp == "ID")
+    
+    if ((*curr)->cp == "const" || (*curr)->cp == "(" || (*curr)->cp == "!" || (*curr)->cp == "ID")
     {
-      if (AE(&curr))
+      if (AE())
       {
-        if (OEE(&curr))
+        if (OEE())
         {
           return true;
         }
         else
         {
-          cout << "Error syntax at: " << curr->cp << endl;
+          cout << "Error syntax at: " << (*curr)->cp << endl;
           return false;
         }
       }
       else
       {
-        cout << "Error syntax at: " << curr->cp << endl;
+        cout << "Error syntax at: " << (*curr)->cp << endl;
         return false;
       }
     }
     else
     {
-      cout << "Error syntax at: " << curr->cp << endl;
+      cout << "Error syntax at: " << (*curr)->cp << endl;
       return false;
     }
   }
 
-  bool AE(linklist **start)
+  bool AE()
   {
 
-    linklist *curr = *start;
-    if (curr->cp == "const" || curr->cp == "(" || curr->cp == "!" || curr->cp == "ID")
+    
+    if ((*curr)->cp == "const" || (*curr)->cp == "(" || (*curr)->cp == "!" || (*curr)->cp == "ID")
     {
-      if (RE(&curr))
+      if (RE())
       {
-        if (AEE(&curr))
+        if (AEE())
         {
           return true;
         }
         else
         {
-          cout << "Error syntax at: " << curr->cp << endl;
+          cout << "Error syntax at: " << (*curr)->cp << endl;
           return false;
         }
       }
       else
       {
-        cout << "Error syntax at: " << curr->cp << endl;
+        cout << "Error syntax at: " << (*curr)->cp << endl;
         return false;
       }
     }
     else
     {
-      cout << "Error syntax at: " << curr->cp << endl;
+      cout << "Error syntax at: " << (*curr)->cp << endl;
       return false;
     }
   }
 
-  bool OEE(linklist **start)
+  bool OEE()
   {
 
-    linklist *curr = *start;
-    if (curr->cp == "||" || curr->cp == "," || curr->cp == ")")
+    
+    if ((*curr)->cp == "||" || (*curr)->cp == "," || (*curr)->cp == ")")
     {
-      if (curr->cp == "||")
+      if ((*curr)->cp == "||")
       {
-        curr = curr->next;
-        if (AEE(&curr))
+        (*curr) = (*curr)->next;
+        if (AEE())
         {
           return true;
         }
         else
         {
-          cout << "Error syntax at: " << curr->cp << endl;
+          cout << "Error syntax at: " << (*curr)->cp << endl;
           return false;
         }
       }
       else
       {
-        cout << "Error syntax at: " << curr->cp << endl;
+        cout << "Error syntax at: " << (*curr)->cp << endl;
         return false;
       }
     }
     else
     {
-      cout << "Error syntax at: " << curr->cp << endl;
+      cout << "Error syntax at: " << (*curr)->cp << endl;
       return false;
     }
   }
 
-  bool RE(linklist **start)
+  bool RE()
   {
 
-    linklist *curr = *start;
-    if (curr->cp == "const" || curr->cp == "(" || curr->cp == "!" || curr->cp == "ID")
+    
+    if ((*curr)->cp == "const" || (*curr)->cp == "(" || (*curr)->cp == "!" || (*curr)->cp == "ID")
     {
-      if (PE(&curr))
+      if (PE())
       {
-        if (REE(&curr))
+        if (REE())
         {
           return true;
         }
         else
         {
-          cout << "Error syntax at: " << curr->cp << endl;
+          cout << "Error syntax at: " << (*curr)->cp << endl;
           return false;
         }
       }
       else
       {
-        cout << "Error syntax at: " << curr->cp << endl;
+        cout << "Error syntax at: " << (*curr)->cp << endl;
         return false;
       }
     }
     else
     {
-      cout << "Error syntax at: " << curr->cp << endl;
+      cout << "Error syntax at: " << (*curr)->cp << endl;
       return false;
     }
   }
 
-  bool PE(linklist **start)
+  bool PE()
   {
 
-    linklist *curr = *start;
-    if (curr->cp == "const" || curr->cp == "(" || curr->cp == "!" || curr->cp == "ID")
+    
+    if ((*curr)->cp == "const" || (*curr)->cp == "(" || (*curr)->cp == "!" || (*curr)->cp == "ID")
     {
-      if (ME(&curr))
+      if (ME())
       {
-        if (PEE(&curr))
+        if (PEE())
         {
           return true;
         }
         else
         {
-          cout << "Error syntax at: " << curr->cp << endl;
+          cout << "Error syntax at: " << (*curr)->cp << endl;
           return false;
         }
       }
       else
       {
-        cout << "Error syntax at: " << curr->cp << endl;
+        cout << "Error syntax at: " << (*curr)->cp << endl;
         return false;
       }
     }
     else
     {
-      cout << "Error syntax at: " << curr->cp << endl;
+      cout << "Error syntax at: " << (*curr)->cp << endl;
       return false;
     }
   }
 
-  bool ME(linklist **start)
+  bool ME()
   {
 
-    linklist *curr = *start;
-    if (curr->cp == "const" || curr->cp == "(" || curr->cp == "!" || curr->cp == "ID")
+    
+    if ((*curr)->cp == "const" || (*curr)->cp == "(" || (*curr)->cp == "!" || (*curr)->cp == "ID")
     {
-      if (F(&curr))
+      if (F())
       {
-        if (MEE(&curr))
+        if (MEE())
         {
           return true;
         }
         else
         {
-          cout << "Error syntax at: " << curr->cp << endl;
+          cout << "Error syntax at: " << (*curr)->cp << endl;
           return false;
         }
       }
       else
       {
-        cout << "Error syntax at: " << curr->cp << endl;
+        cout << "Error syntax at: " << (*curr)->cp << endl;
         return false;
       }
     }
     else
     {
-      cout << "Error syntax at: " << curr->cp << endl;
+      cout << "Error syntax at: " << (*curr)->cp << endl;
       return false;
     }
   }
 
-  bool F(linklist **start)
+  bool F()
   {
 
-    linklist *curr = *start;
-    if (curr->cp == "const" || curr->cp == "(" || curr->cp == "!" || curr->cp == "ID")
+    
+    if ((*curr)->cp == "const" || (*curr)->cp == "(" || (*curr)->cp == "!" || (*curr)->cp == "ID")
     {
-      if (curr->cp == "const")
+      if ((*curr)->cp == "const")
       {
-        curr = curr->next;
-        if (F(&curr))
+        (*curr) = (*curr)->next;
+        if (F())
         {
           return true;
         }
         else
         {
-          cout << "Error syntax at: " << curr->cp << endl;
+          cout << "Error syntax at: " << (*curr)->cp << endl;
           return false;
         }
       }
-      else if (curr->cp == "(")
+      else if ((*curr)->cp == "(")
       {
-        curr = curr->next;
-        if (OE(&curr))
+        (*curr) = (*curr)->next;
+        if (OE())
         {
-          if (curr->cp == ")")
+          if ((*curr)->cp == ")")
           {
-            curr = curr->next;
-            if (F(&curr))
+            (*curr) = (*curr)->next;
+            if (F())
             {
               return true;
             }
@@ -2909,67 +2914,72 @@ public:
         }
       }
 
-      else if (curr->cp == "!")
+      else if ((*curr)->cp == "!")
       {
-        curr = curr->next;
-        if (PE(&curr))
+        (*curr) = (*curr)->next;
+        if (PE())
         {
-          if (F(&curr))
+          if (F())
           {
             return true;
           }
         }
       }
 
-      else if (curr->cp == "ID")
+      else if ((*curr)->cp == "ID")
       {
-        curr = curr->next;
-        if (XOE1(&curr))
+        (*curr) = (*curr)->next;
+        if (XOE1())
         {
-          if (F(&curr))
+          if (F())
           {
             return true;
           }
         }
+        else
+        {
+          return false;
+        }
+        
       }
 
       else
       {
-        cout << "Error syntax at: " << curr->cp << endl;
+        cout << "Error syntax at: " << (*curr)->cp << endl;
         return false;
       }
     }
   }
 
-  bool XOE1(linklist **start)
+  bool XOE1()
   {
-    linklist *curr = *start;
+    
 
-    if (curr->cp == "[" || curr->cp == "const" || curr->cp == "(" || curr->cp == "!" || curr->cp == "ID")
+    if ((*curr)->cp == "[" || (*curr)->cp == "const" || (*curr)->cp == "(" || (*curr)->cp == "!" || (*curr)->cp == "ID")
     {
-      if (fn_call(&curr))
+      if (fn_call())
       {
         return true;
       }
-      else if (array(&curr))
+      else if (array())
 
       {
-        if (nt2(&curr))
+        if (nt2())
         {
-          if (curr->cp == "inc_dec")
+          if ((*curr)->cp == "inc_dec")
           {
-            curr = curr->next;
+            (*curr) = (*curr)->next;
             return true;
           }
           else
           {
-            cout << "Error syntax at: " << curr->cp << endl;
+            cout << "Error syntax at: " << (*curr)->cp << endl;
             return false;
           }
         }
         else
         {
-          cout << "Error syntax at: " << curr->cp << endl;
+          cout << "Error syntax at: " << (*curr)->cp << endl;
           return false;
         }
       }
@@ -2980,43 +2990,43 @@ public:
     }
     else
     {
-      cout << "Error syntax at: " << curr->cp << endl;
+      cout << "Error syntax at: " << (*curr)->cp << endl;
       return false;
     }
   }
 
-  bool nt2(linklist **start)
+  bool nt2()
   {
-    linklist *curr = *start;
-    if (curr->cp == "." || curr->cp == "inc_dec")
+    
+    if ((*curr)->cp == "." || (*curr)->cp == "inc_dec")
     {
-      if (curr->cp == ".")
+      if ((*curr)->cp == ".")
       {
-        curr = curr->next;
-        if (curr->cp == "ID")
+        (*curr) = (*curr)->next;
+        if ((*curr)->cp == "ID")
         {
-          curr = curr->next;
-          if (array(&curr))
+          (*curr) = (*curr)->next;
+          if (array())
           {
-            if (nt2(&curr))
+            if (nt2())
             {
               return true;
             }
             else
             {
-              cout << "Error syntax at: " << curr->cp << endl;
+              cout << "Error syntax at: " << (*curr)->cp << endl;
               return false;
             }
           }
           else
           {
-            cout << "Error syntax at: " << curr->cp << endl;
+            cout << "Error syntax at: " << (*curr)->cp << endl;
             return false;
           }
         }
         else
         {
-          cout << "Error syntax at: " << curr->cp << endl;
+          cout << "Error syntax at: " << (*curr)->cp << endl;
           return false;
         }
       }
@@ -3027,28 +3037,28 @@ public:
     }
     else
     {
-      cout << "Error syntax at: " << curr->cp << endl;
+      cout << "Error syntax at: " << (*curr)->cp << endl;
       return false;
     }
   }
 
-  bool AEE(linklist **start)
+  bool AEE()
   {
-    linklist *curr = *start;
-    if (curr->cp == "&&" || curr->cp == "," || curr->cp == ")")
+    
+    if ((*curr)->cp == "&&" || (*curr)->cp == "," || (*curr)->cp == ")")
     {
-      if (curr->cp == "&&")
+      if ((*curr)->cp == "&&")
       {
-        curr = curr->next;
-        if (RE(&curr))
+        (*curr) = (*curr)->next;
+        if (RE())
         {
-          if (AEE(&curr))
+          if (AEE())
           {
             return true;
           }
           else
           {
-            cout << "Error syntax at: " << curr->cp << endl;
+            cout << "Error syntax at: " << (*curr)->cp << endl;
             return false;
           }
         }
@@ -3060,27 +3070,27 @@ public:
     }
     else
     {
-      cout << "Error syntax at: " << curr->cp << endl;
+      cout << "Error syntax at: " << (*curr)->cp << endl;
       return false;
     }
   }
-  bool PEE(linklist **start)
+  bool PEE()
   {
-    linklist *curr = *start;
-    if (curr->cp == "PM" || curr->cp == "," || curr->cp == ")")
+    
+    if ((*curr)->cp == "PM" || (*curr)->cp == "," || (*curr)->cp == ")")
     {
-      if (curr->cp == "PM")
+      if ((*curr)->cp == "PM")
       {
-        curr = curr->next;
-        if (ME(&curr))
+        (*curr) = (*curr)->next;
+        if (ME())
         {
-          if (PEE(&curr))
+          if (PEE())
           {
             return true;
           }
           else
           {
-            cout << "Error syntax at: " << curr->cp << endl;
+            cout << "Error syntax at: " << (*curr)->cp << endl;
             return false;
           }
         }
@@ -3092,27 +3102,27 @@ public:
     }
     else
     {
-      cout << "Error syntax at: " << curr->cp << endl;
+      cout << "Error syntax at: " << (*curr)->cp << endl;
       return false;
     }
   }
-  bool MEE(linklist **start)
+  bool MEE()
   {
-    linklist *curr = *start;
-    if (curr->cp == "MDM" || curr->cp == "," || curr->cp == ")")
+    
+    if ((*curr)->cp == "MDM" || (*curr)->cp == "," || (*curr)->cp == ")")
     {
-      if (curr->cp == "MDM")
+      if ((*curr)->cp == "MDM")
       {
-        curr = curr->next;
-        if (F(&curr))
+        (*curr) = (*curr)->next;
+        if (F())
         {
-          if (MEE(&curr))
+          if (MEE())
           {
             return true;
           }
           else
           {
-            cout << "Error syntax at: " << curr->cp << endl;
+            cout << "Error syntax at: " << (*curr)->cp << endl;
             return false;
           }
         }
@@ -3124,27 +3134,27 @@ public:
     }
     else
     {
-      cout << "Error syntax at: " << curr->cp << endl;
+      cout << "Error syntax at: " << (*curr)->cp << endl;
       return false;
     }
   }
-  bool REE(linklist **start)
+  bool REE()
   {
-    linklist *curr = *start;
-    if (curr->cp == "ROP" || curr->cp == "," || curr->cp == ")")
+    
+    if ((*curr)->cp == "ROP" || (*curr)->cp == "," || (*curr)->cp == ")")
     {
-      if (curr->cp == "ROP")
+      if ((*curr)->cp == "ROP")
       {
-        curr = curr->next;
-        if (PE(&curr))
+        (*curr) = (*curr)->next;
+        if (PE())
         {
-          if (REE(&curr))
+          if (REE())
           {
             return true;
           }
           else
           {
-            cout << "Error syntax at: " << curr->cp << endl;
+            cout << "Error syntax at: " << (*curr)->cp << endl;
             return false;
           }
         }
@@ -3156,10 +3166,13 @@ public:
     }
     else
     {
-      cout << "Error syntax at: " << curr->cp << endl;
+      cout << "Error syntax at: " << (*curr)->cp << endl;
       return false;
     }
   }
+
+
+
 
   void print(linklist **start)
   {
@@ -3183,9 +3196,4 @@ public:
     }
   }
 
-  //private:
-  // string cp;
-  // string vp;
-  // int lineno;
-  // linklist *next;
 };

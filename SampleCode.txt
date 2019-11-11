@@ -1,4 +1,12 @@
 void main()
 {
-int a
+int b;
+if(b>a)
+{
+  int a;
+}
+else
+{
+  float b;
+}
 }$

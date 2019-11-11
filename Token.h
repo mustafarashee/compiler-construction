@@ -367,7 +367,7 @@ public:
      else if (word[0] == '$' )
     {
       
-      this->cp = "EndOfFile";
+      this->cp = "$";
       this->vp = word;
       settoken.cp = this->cp;
         settoken.vp = this->vp;
@@ -381,9 +381,9 @@ public:
        list.print(&start);
       // cout<<list.start(&start);
       cout<<endl<<endl<<"Syntax Analyzer :"<<endl<<endl;
-       bool check =true;
+       bool check = true;
        check = list.start(&start);
-       cout<<check<<endl; 
+       cout<< check <<endl; 
      // cout << " CP : " << this->cp << "  VP : " << this->vp << "  Line no:  " << this->lineno << endl;
     }
 
