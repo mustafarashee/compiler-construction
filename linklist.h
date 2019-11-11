@@ -34,6 +34,8 @@ public:
     }
   }
 
+  
+
   bool syntaxAnalyzer(linklist **start)
   {
     linklist *curr = *start;
@@ -68,6 +70,7 @@ public:
     }
     else
     {
+      cout<<"Error syntax"<<endl;
       return false;
     }
   }
@@ -88,6 +91,7 @@ public:
     }
     else
     {
+      cout<<"Error syntax"<<endl;
       return false;
     }
   }
@@ -114,11 +118,13 @@ public:
           }
           else
           {
+            cout<<"Error syntax"<<endl;
             return false;
           }
         }
         else
         {
+          cout<<"Error syntax"<<endl;
           return false;
         }
       }
@@ -136,16 +142,19 @@ public:
             }
             else
             {
+              cout<<"Error syntax"<<endl;
               return false;
             }
           }
           else
           {
+            cout<<"Error syntax"<<endl;
             return false;
           }
         }
         else
         {
+          cout<<"Error syntax"<<endl;
           return false;
         }
       }
@@ -163,16 +172,19 @@ public:
             }
             else
             {
+              cout<<"Error syntax"<<endl;
               return false;
             }
           }
           else
           {
+            cout<<"Error syntax"<<endl;
             return false;
           }
         }
         else
         {
+          cout<<"Error syntax"<<endl;
           return false;
         }
       }
@@ -183,6 +195,7 @@ public:
     }
     else
     {
+      cout<<"Error syntax"<<endl;
       return false;
     }
   }
@@ -212,36 +225,43 @@ public:
                 }
                 else
                 {
+                  cout<<"Error syntax"<<endl;
                   return false;
                 }
               }
               else
               {
+                cout<<"Error syntax"<<endl;
                 return false;
               }
             }
             else
             {
+              cout<<"Error syntax"<<endl;
               return false;
             }
           }
           else
           {
+            cout<<"Error syntax"<<endl;
             return false;
           }
         }
         else
         {
+          cout<<"Error syntax"<<endl;
           return false;
         }
       }
       else
       {
+        cout<<"Error syntax"<<endl;
         return false;
       }
     }
     else
     {
+      cout<<"Error syntax"<<endl;
       return false;
     }
   }
@@ -261,11 +281,13 @@ public:
           }
           else
           {
+            cout<<"Error syntax"<<endl;
             return false;
           }
         }
         else
         {
+          cout<<"Error syntax"<<endl;
           return false;
         }
       }
@@ -283,11 +305,13 @@ public:
             }
             else
             {
+              cout<<"Error syntax"<<endl;
               return false;
             }
           }
           else
           {
+            cout<<"Error syntax"<<endl;
             return false;
           }
         }
@@ -304,11 +328,13 @@ public:
           }
           else
           {
+            cout<<"Error syntax"<<endl;
             return false;
           }
         }
         else
         {
+          cout<<"Error syntax"<<endl;
           return false;
         }
       }
@@ -325,11 +351,13 @@ public:
             }
             else
             {
+              cout<<"Error syntax"<<endl;
               return false;
             }
           }
           else
           {
+            cout<<"Error syntax"<<endl;
             return false;
           }
         }
@@ -345,6 +373,7 @@ public:
     }
     else
     {
+      cout<<"Error syntax"<<endl;
       return false;
     }
   }
@@ -359,6 +388,7 @@ public:
     }
     else
     {
+      cout<<"Error syntax"<<endl;
       return false;
     }
   }
@@ -380,12 +410,14 @@ public:
         }
         else
         {
+          cout<<"Error syntax"<<endl;
           return false;
         }
       }
     }
     else
     {
+      cout<<"Error syntax"<<endl;
       return false;
     }
   }
@@ -416,6 +448,7 @@ public:
     }
     else
     {
+      cout<<"Error syntax"<<endl;
       return false;
     }
   }
@@ -433,6 +466,7 @@ public:
         }
         else
         {
+          cout<<"Error syntax"<<endl;
           return false;
         }
       }
@@ -443,6 +477,7 @@ public:
     }
     else
     {
+      cout<<"Error syntax"<<endl;
       return false;
     }
   }
@@ -460,6 +495,7 @@ public:
         }
         else
         {
+          cout<<"Error syntax"<<endl;
           return false;
         }
       }
@@ -469,11 +505,13 @@ public:
       }
       else
       {
+        cout<<"Error syntax"<<endl;
         return false;
       }
     }
     else
     {
+      cout<<"Error syntax"<<endl;
       return false;
     }
   }
@@ -495,16 +533,19 @@ public:
         }
         else
         {
+          cout<<"Error syntax"<<endl;
           return false;
         }
       }
       else
       {
+        cout<<"Error syntax"<<endl;
         return false;
       }
     }
     else
     {
+      cout<<"Error syntax"<<endl;
       return false;
     }
   }
@@ -526,16 +567,19 @@ public:
         }
         else
         {
+          cout<<"Error syntax"<<endl;
           return false;
         }
       }
       else
       {
+        cout<<"Error syntax"<<endl;
         return false;
       }
     }
     else
     {
+      cout<<"Error syntax"<<endl;
       return false;
     }
   }
@@ -555,11 +599,13 @@ public:
       }
       else
       {
+        cout<<"Error syntax"<<endl;
         return false;
       }
     }
     else
     {
+      cout<<"Error syntax"<<endl;
       return false;
     }
   }
@@ -582,16 +628,19 @@ public:
         }
         else
         {
+          cout<<"Error syntax"<<endl;
           return false;
         }
       }
       else
       {
+        cout<<"Error syntax"<<endl;
         return false;
       }
     }
     else
     {
+      cout<<"Error syntax"<<endl;
       return false;
     }
   }
@@ -610,6 +659,7 @@ public:
         }
         else
         {
+          cout<<"Error syntax"<<endl;
           return false;
         }
       }
@@ -623,16 +673,19 @@ public:
         }
         else
         {
+          cout<<"Error syntax"<<endl;
           return false;
         }
       }
       else
       {
+        cout<<"Error syntax"<<endl;
         return false;
       }
     }
     else
     {
+      cout<<"Error syntax"<<endl;
       return false;
     }
   }
@@ -660,36 +713,43 @@ public:
                 }
                 else
                 {
+                  cout<<"Error syntax"<<endl;
                   return false;
                 }
               }
               else
               {
+                cout<<"Error syntax"<<endl;
                 return false;
               }
             }
             else
             {
+              cout<<"Error syntax"<<endl;
               return false;
             }
           }
           else
           {
+            cout<<"Error syntax"<<endl;
             return false;
           }
         }
         else
         {
+          cout<<"Error syntax"<<endl;
           return false;
         }
       }
       else
       {
+        cout<<"Error syntax"<<endl;
         return false;
       }
     }
     else
     {
+      cout<<"Error syntax"<<endl;
       return false;
     }
   }
@@ -708,16 +768,19 @@ public:
         }
         else
         {
+          cout<<"Error syntax"<<endl;
           return false;
         }
       }
       else
       {
+        cout<<"Error syntax"<<endl;
         return false;
       }
     }
     else
     {
+      cout<<"Error syntax"<<endl;
       return false;
     }
   }
@@ -736,6 +799,7 @@ public:
         }
         else
         {
+          cout<<"Error syntax"<<endl;
           return false;
         }
       }
@@ -749,12 +813,14 @@ public:
         }
         else
         {
+          cout<<"Error syntax"<<endl;
           return false;
         }
       }
     }
     else
     {
+      cout<<"Error syntax"<<endl;
       return false;
     }
   }
@@ -783,6 +849,7 @@ public:
     }
     else
     {
+      cout<<"Error syntax"<<endl;
       return false;
     }
   }
@@ -799,6 +866,7 @@ public:
         }
         else
         {
+          cout<<"Error syntax"<<endl;
           return false;
         }
       }
@@ -814,6 +882,7 @@ public:
     }
     else
     {
+      cout<<"Error syntax"<<endl;
       return false;
     }
   }
@@ -840,6 +909,7 @@ public:
     }
     else
     {
+      cout<<"Error syntax"<<endl;
       return false;
     }
   }
@@ -856,13 +926,14 @@ public:
           return true;
         }
       }
-      else
+      else if(curr->cp =="}")
       {
         return true;
       }
     }
     else
     {
+      cout<<"Error syntax"<<endl;
       return false;
     }
   }
@@ -902,6 +973,7 @@ public:
         }
         else
         {
+          cout<<"Error syntax"<<endl;
           return false;
         }
       }
@@ -915,6 +987,7 @@ public:
         }
         else
         {
+          cout<<"Error syntax"<<endl;
           return false;
         }
       }
@@ -928,6 +1001,7 @@ public:
         }
         else
         {
+          cout<<"Error syntax"<<endl;
           return false;
         }
       }
@@ -944,17 +1018,20 @@ public:
           }
           else
           {
+            cout<<"Error syntax"<<endl;
             return false;
           }
         }
         else
         {
+          cout<<"Error syntax"<<endl;
           return false;
         }
       }
     }
     else
     {
+      cout<<"Error syntax"<<endl;
       return false;
     }
   }
@@ -973,6 +1050,7 @@ public:
       }
       else
       {
+        cout<<"Error syntax"<<endl;
         return false;
       }
       
@@ -980,6 +1058,7 @@ public:
       
     }
     else {
+      cout<<"Error syntax"<<endl;
       return false;
     }
     
@@ -1001,18 +1080,22 @@ public:
 
           }
           else {
+            cout<<"Error syntax"<<endl;
             return false;
           }
         }
         else {
+            cout<<"Error syntax"<<endl;
             return false;
           }
       }
       else {
+            cout<<"Error syntax"<<endl;
             return false;
           }
     }
     else {
+            cout<<"Error syntax"<<endl;
             return false;
           }
   }
@@ -1039,21 +1122,25 @@ public:
               }
               else
               {
+                cout<<"Error syntax"<<endl;
                 return false;
               }
             }
              else
               {
+                cout<<"Error syntax"<<endl;
                 return false;
               }
           }
            else
               {
+                cout<<"Error syntax"<<endl;
                 return false;
               }
         }
          else
               {
+                cout<<"Error syntax"<<endl;
                 return false;
               }
       }
@@ -1065,6 +1152,7 @@ public:
     }
      else
               {
+                cout<<"Error syntax"<<endl;
                 return false;
               }
   }
@@ -1080,14 +1168,17 @@ bool array3(linklist **start)
         return true;
       }
       else{
+        cout<<"Error syntax"<<endl;
         return false;
       }
     }
     else{
+        cout<<"Error syntax"<<endl;
         return false;
       }
   }
   else{
+        cout<<"Error syntax"<<endl;
         return false;
       }
 }
@@ -1107,12 +1198,14 @@ bool array4(linklist **start)
         }
         else
         {
+           cout<<"Error syntax"<<endl;
            return false;
         }
         
       }
        else
         {
+           cout<<"Error syntax"<<endl;
            return false;
         }
       
@@ -1124,6 +1217,7 @@ bool array4(linklist **start)
   }
    else
         {
+           cout<<"Error syntax"<<endl;
            return false;
         }
 }
@@ -1141,6 +1235,7 @@ bool init(linklist **start)
       }
       else
       {
+        cout<<"Error syntax"<<endl;
         return false;
       }
       
@@ -1152,6 +1247,7 @@ bool init(linklist **start)
       }
       else
       {
+        cout<<"Error syntax"<<endl;
         return false;
       }
       
@@ -1159,6 +1255,7 @@ bool init(linklist **start)
   }
   else
       {
+        cout<<"Error syntax"<<endl;
         return false;
       }
 }
@@ -1174,6 +1271,7 @@ bool init2(linklist **start)
         return true;
       }
       else{
+        cout<<"Error syntax"<<endl;
         return false;
       }
     }
@@ -1183,11 +1281,13 @@ bool init2(linklist **start)
     }
     else
     {
+      cout<<"Error syntax"<<endl;
       return false;
     }
     
   }
   else{
+    cout<<"Error syntax"<<endl;
     return false;
   }
 }
@@ -1204,6 +1304,7 @@ bool init3(linklist **start)
         return true;
       }
       else{
+        cout<<"Error syntax"<<endl;
         return false;
       }
     }
@@ -1212,6 +1313,7 @@ bool init3(linklist **start)
     }
   }
   else {
+    cout<<"Error syntax"<<endl;
     return false;
   }
 }
@@ -1230,10 +1332,12 @@ bool init4(linklist **start)
           return true;
         }
         else {
+          cout<<"Error syntax"<<endl;
           return false;
         }
       }
       else {
+          cout<<"Error syntax"<<endl;
           return false;
         }
     }
@@ -1246,14 +1350,17 @@ bool init4(linklist **start)
 
       }
       else {
+          cout<<"Error syntax"<<endl;
           return false;
         }
     }
     else {
+          cout<<"Error syntax"<<endl;
           return false;
         }
   }
   else {
+          cout<<"Error syntax"<<endl;
           return false;
         }
 }
@@ -1275,10 +1382,12 @@ bool list(linklist **start)
             return true;
           }
           else {
+          cout<<"Error syntax"<<endl;
           return false;
         }
         }
         else {
+          cout<<"Error syntax"<<endl;
           return false;
         }
       }
@@ -1288,6 +1397,7 @@ bool list(linklist **start)
     }
   }
   else {
+          cout<<"Error syntax"<<endl;
           return false;
         }
 }
@@ -1306,22 +1416,26 @@ bool obj_dec(linklist **start)
         }
         else
         {
+          cout<<"Error syntax"<<endl;
           return false;
         }
         
       }
       else
         {
+          cout<<"Error syntax"<<endl;
           return false;
         }
     }
     else
         {
+          cout<<"Error syntax"<<endl;
           return false;
         }
   }
   else
         {
+          cout<<"Error syntax"<<endl;
           return false;
         }
 }
@@ -1343,6 +1457,7 @@ bool new_init(linklist **start)
         }
         else
         {
+          cout<<"Error syntax"<<endl;
           return false;
         }
         
@@ -1358,6 +1473,7 @@ bool new_init(linklist **start)
         }
   }else
         {
+          cout<<"Error syntax"<<endl;
           return false;
         }
 }
@@ -1383,22 +1499,26 @@ bool list2(linklist **start)
             }
             else
         {
+          cout<<"Error syntax"<<endl;
           return false;
         }
           }
           else
         {
+          cout<<"Error syntax"<<endl;
           return false;
         }
         }
         else
         {
+          cout<<"Error syntax"<<endl;
           return false;
         }
       
     }
     else
         {
+          cout<<"Error syntax"<<endl;
           return false;
         }
   }
@@ -1410,6 +1530,7 @@ bool list2(linklist **start)
 }
 else
         {
+          cout<<"Error syntax"<<endl;
           return false;
         }}
 
@@ -1430,12 +1551,14 @@ bool array(linklist **start)
         }
         else
         {
+          cout<<"Error syntax"<<endl;
           return false;
         }
         
       }
       else
         {
+          cout<<"Error syntax"<<endl;
           return false;
         }
     }
@@ -1445,6 +1568,7 @@ bool array(linklist **start)
   }
   else
         {
+          cout<<"Error syntax"<<endl;
           return false;
         }
 }
@@ -1460,14 +1584,17 @@ bool ass_st(linklist **start)
           return true;
         }
         else {
+          cout<<"Error syntax"<<endl;
           return false;
         }
     }
     else {
+          cout<<"Error syntax"<<endl;
           return false;
         }
   }
   else {
+          cout<<"Error syntax"<<endl;
           return false;
         }
 }
@@ -1483,10 +1610,12 @@ bool ass_st1(linklist **start)
 
     }
     else {
+          cout<<"Error syntax"<<endl;
           return false;
         }
   }
   else {
+          cout<<"Error syntax"<<endl;
           return false;
         }
 }
@@ -1502,6 +1631,7 @@ bool XX(linklist **start)
         return true;
       }
       else {
+          cout<<"Error syntax"<<endl;
           return false;
         }
     }
@@ -1511,6 +1641,7 @@ bool XX(linklist **start)
     }
   }
   else {
+          cout<<"Error syntax"<<endl;
           return false;
         }
 }
@@ -1530,18 +1661,22 @@ bool constructor_dec(linklist **start)
           return true;
         }
         else {
+          cout<<"Error syntax"<<endl;
           return false;
         }
       }
       else {
+          cout<<"Error syntax"<<endl;
           return false;
         }
     }
     else {
+          cout<<"Error syntax"<<endl;
           return false;
         }
   }
   else {
+          cout<<"Error syntax"<<endl;
           return false;
         }
 }
@@ -1564,22 +1699,27 @@ bool fn_call1(linklist **start)
 
           }
           else {
+          cout<<"Error syntax"<<endl;
           return false;
         }
         }
         else {
+          cout<<"Error syntax"<<endl;
           return false;
         }
       }
       else {
+          cout<<"Error syntax"<<endl;
           return false;
         }
     }
     else {
+          cout<<"Error syntax"<<endl;
           return false;
         }
   }
   else {
+          cout<<"Error syntax"<<endl;
           return false;
         }
 }
@@ -1601,14 +1741,17 @@ bool check_id(linklist **start)
             return true;
           }
            else {
+          cout<<"Error syntax"<<endl;
           return false;
         }
         }
          else {
+          cout<<"Error syntax"<<endl;
           return false;
         }
       }
        else {
+          cout<<"Error syntax"<<endl;
           return false;
         }
     }
@@ -1619,6 +1762,7 @@ bool check_id(linklist **start)
 
   }
    else {
+          cout<<"Error syntax"<<endl;
           return false;
         }
 }
@@ -1634,6 +1778,7 @@ bool arg(linklist **start)
          return true;
        }
         else {
+       cout<<"Error syntax"<<endl;
        return false;
      }
      }
@@ -1642,6 +1787,7 @@ bool arg(linklist **start)
      }
    }
     else {
+       cout<<"Error syntax"<<endl;
        return false;
      }
 
@@ -1662,6 +1808,7 @@ bool arg1(linklist **start)
         }
       }
       else {
+       cout<<"Error syntax"<<endl;
        return false;
      }
     }
@@ -1670,6 +1817,7 @@ bool arg1(linklist **start)
     }
   }
   else {
+       cout<<"Error syntax"<<endl;
        return false;
      }
 }
@@ -1685,6 +1833,7 @@ bool SST1(linklist **start)
         return true;
       }
       else {
+       cout<<"Error syntax"<<endl;
        return false;
      }
     }
@@ -1696,15 +1845,18 @@ bool SST1(linklist **start)
         return true;
       }
       else {
+       cout<<"Error syntax"<<endl;
        return false;
      }
 
     }
     else {
+       cout<<"Error syntax"<<endl;
        return false;
      }
   }
   else {
+       cout<<"Error syntax"<<endl;
        return false;
      }
 }
@@ -1727,6 +1879,7 @@ bool L2(linklist **start)
         return true;
       }
       else {
+        cout<<"Error syntax"<<endl;
         return false;
       }
     }
@@ -1735,11 +1888,13 @@ bool L2(linklist **start)
       return true;
     }
     else {
+      cout<<"Error syntax"<<endl;
       return false;
     }
     
   }
   else {
+    cout<<"Error syntax"<<endl;
     return false;
   }
 }
@@ -1760,15 +1915,18 @@ bool xxx(linklist **start)
          return true;
        }
        else {
+    cout<<"Error syntax"<<endl;
     return false;
   }
     }
     else {
+    cout<<"Error syntax"<<endl;
     return false;
   }
     
   }
   else {
+    cout<<"Error syntax"<<endl;
     return false;
   }
 }
@@ -1784,11 +1942,13 @@ bool SST2(linklist **start)
     }
     else
     {
+       cout<<"Error syntax"<<endl;
        return false;
     }
     
   }
   else{
+    cout<<"Error syntax"<<endl;
     return false;
   }
 }
@@ -1805,14 +1965,17 @@ bool fn_call(linklist **start)
         return true;
       }
       else{
+    cout<<"Error syntax"<<endl;
     return false;
   }
     }
     else{
+    cout<<"Error syntax"<<endl;
     return false;
   }
   }
   else{
+    cout<<"Error syntax"<<endl;
     return false;
   }
 }
@@ -1828,11 +1991,13 @@ if(curr->cp=="return")
   }
   else
   {
+    cout<<"Error syntax"<<endl;
     return false;
   }
   
 }
-else {return false;}
+else {cout<<"Error syntax"<<endl;
+return false;}
 }
 bool OE1(linklist **start)
 {
@@ -1851,6 +2016,7 @@ bool OE1(linklist **start)
   }
   else
   {
+    cout<<"Error syntax"<<endl;
     return false;
   }
   
@@ -1883,43 +2049,51 @@ bool if_else(linklist **start)
                 }
                  else
                 {
+                  cout<<"Error syntax"<<endl;
                   return false;
                   }
                 
               }
               else
     {
+      cout<<"Error syntax"<<endl;
       return false;
     }
               
             }
             else
     {
+      cout<<"Error syntax"<<endl;
       return false;
     }
           }
           else
   {
+    cout<<"Error syntax"<<endl;
     return false;
   }
         }
         else
   {
+    cout<<"Error syntax"<<endl;
     return false;
   }
       }
       else
   {
+    cout<<"Error syntax"<<endl;
     return false;
   }
     }
     else
   {
+    cout<<"Error syntax"<<endl;
     return false;
   }
   }
   else
   {
+    cout<<"Error syntax"<<endl;
     return false;
   }
 }
@@ -1943,16 +2117,19 @@ bool optional_else(linklist **start)
         }
         else
   {
+    cout<<"Error syntax"<<endl;
     return false;
   }
       }
       else
   {
+    cout<<"Error syntax"<<endl;
     return false;
   }
     }
     else
   {
+    cout<<"Error syntax"<<endl;
     return false;
   }
     }
@@ -1989,36 +2166,43 @@ bool while_st(linklist **start)
               }
               else
   {
+    cout<<"Error syntax"<<endl;
     return false;
   }
             }
             else
   {
+    cout<<"Error syntax"<<endl;
     return false;
   }
           }
           else
   {
+    cout<<"Error syntax"<<endl;
     return false;
   }
         }
         else
   {
+    cout<<"Error syntax"<<endl;
     return false;
   }
       }
       else
   {
+    cout<<"Error syntax"<<endl;
     return false;
   }
     }
     else
   {
+    cout<<"Error syntax"<<endl;
     return false;
   }
   }
   else
   {
+    cout<<"Error syntax"<<endl;
     return false;
   }
 }
@@ -2051,41 +2235,49 @@ bool switch_st(linklist **start)
                 }
                 else
   {
+    cout<<"Error syntax"<<endl;
     return false;
   }
               }
               else
   {
+    cout<<"Error syntax"<<endl;
     return false;
   }
             }
             else
   {
+    cout<<"Error syntax"<<endl;
     return false;
   }
           }
           else
   {
+    cout<<"Error syntax"<<endl;
     return false;
   }
         }
         else
   {
+    cout<<"Error syntax"<<endl;
     return false;
   }
       }
       else
   {
+    cout<<"Error syntax"<<endl;
     return false;
   }
     }
     else
   {
+    cout<<"Error syntax"<<endl;
     return false;
   }
   }
   else
   {
+    cout<<"Error syntax"<<endl;
     return false;
   }
 }
@@ -2116,31 +2308,37 @@ bool case_st(linklist **start)
               }
               else
   {
+    cout<<"Error syntax"<<endl;
     return false;
   }
               }
               else
   {
+    cout<<"Error syntax"<<endl;
     return false;
   }
             }
             else
   {
+    cout<<"Error syntax"<<endl;
     return false;
   }
           }
           else
   {
+    cout<<"Error syntax"<<endl;
     return false;
   }
         }
         else
   {
+    cout<<"Error syntax"<<endl;
     return false;
   }
       }
       else
   {
+    cout<<"Error syntax"<<endl;
     return false;
   }
     }
@@ -2151,6 +2349,7 @@ bool case_st(linklist **start)
   }
   else
   {
+    cout<<"Error syntax"<<endl;
     return false;
   }
 }
@@ -2177,21 +2376,25 @@ bool default_st(linklist **start)
             }
             else
   {
+    cout<<"Error syntax"<<endl;
     return false;
   }
           }
           else
   {
+    cout<<"Error syntax"<<endl;
     return false;
   }
         }
         else
   {
+    cout<<"Error syntax"<<endl;
     return false;
   }
       }
       else
   {
+    cout<<"Error syntax"<<endl;
     return false;
   }
     }
@@ -2201,6 +2404,7 @@ bool default_st(linklist **start)
   }
   else
   {
+    cout<<"Error syntax"<<endl;
     return false;
   }
 }
@@ -2237,51 +2441,61 @@ bool for_st(linklist **start)
                     }
                     else
   {
+    cout<<"Error syntax"<<endl;
     return false;
   }
                   }
                   else
   {
+    cout<<"Error syntax"<<endl;
     return false;
   }
                 }
                 else
   {
+    cout<<"Error syntax"<<endl;
     return false;
   }
               }
               else
   {
+    cout<<"Error syntax"<<endl;
     return false;
   }
             }
             else
   {
+    cout<<"Error syntax"<<endl;
     return false;
   }
           }
           else
   {
+    cout<<"Error syntax"<<endl;
     return false;
   }
           
         }
         else
   {
+    cout<<"Error syntax"<<endl;
     return false;
   }
       }
       else
   {
+    cout<<"Error syntax"<<endl;
     return false;
   }
     }
     else
   {
+    cout<<"Error syntax"<<endl;
     return false;
   }
   }
   else{
+    cout<<"Error syntax"<<endl;
     return false;
   }
 }
@@ -2300,10 +2514,12 @@ bool C1(linklist **start)
           return true;
         }
         else{
+    cout<<"Error syntax"<<endl;
     return false;
   }
       }
       else{
+    cout<<"Error syntax"<<endl;
     return false;
   }
     }
@@ -2315,6 +2531,7 @@ bool C1(linklist **start)
         return true;
       }
       else{
+    cout<<"Error syntax"<<endl;
     return false;
   }
     }
@@ -2325,6 +2542,7 @@ bool C1(linklist **start)
     }
   }
   else{
+    cout<<"Error syntax"<<endl;
     return false;
   }
 }
@@ -2345,6 +2563,7 @@ bool C2(linklist **start)
   }
   else
   {
+    cout<<"Error syntax"<<endl;
     return false;
   }
   
@@ -2362,6 +2581,7 @@ bool C3(linklist **start)
         return true;
       }
       else {
+        cout<<"Error syntax"<<endl;
         return false;
       }
     }
@@ -2377,6 +2597,7 @@ bool C3(linklist **start)
     
   }
   else{
+    cout<<"Error syntax"<<endl;
     return false;
   }
 }
@@ -2397,6 +2618,477 @@ bool X11(linklist **start)
 
   }
   else {
+    cout<<"Error syntax"<<endl;
+    return false;
+  }
+}
+
+
+bool OE(linklist **start)
+{
+  linklist *curr = *start;
+  if(curr->cp=="const" || curr->cp=="(" || curr->cp=="!" || curr->cp=="ID")
+  {
+    if(AE(&curr))
+    {
+      if(OEE(&curr))
+      {
+        return true;
+      }
+      else
+      {
+        cout<<"Error syntax"<<endl;
+        return false;
+      }
+    }
+    else
+    {
+      cout<<"Error syntax"<<endl;
+      return false;
+    }
+  }
+  else
+  {
+    cout<<"Error syntax"<<endl;
+    return false;
+  }
+}
+
+
+bool AE(linklist **start)
+{
+
+   linklist *curr = *start;
+  if(curr->cp=="const" || curr->cp=="(" || curr->cp=="!" || curr->cp=="ID")
+  {
+    if(RE(&curr))
+    {
+      if(AEE(&curr))
+      {
+        return true;
+      }
+      else
+      {
+        cout<<"Error syntax"<<endl;
+        return false;
+      }
+    }
+    else
+    {
+      cout<<"Error syntax"<<endl;
+      return false;
+    }
+  }
+  else
+  {
+    cout<<"Error syntax"<<endl;
+    return false;
+  }
+}
+
+
+
+bool OEE(linklist **start)
+{
+
+   linklist *curr = *start;
+  if(curr->cp=="||" || curr->cp=="," || curr->cp==")")
+  {
+    if(curr->cp == "||")
+    {
+      curr = curr->next;
+      if(AEE(&curr))
+      {
+        return true;
+      }
+      else
+      {
+        cout<<"Error syntax"<<endl;
+        return false;
+      }
+    }
+    else
+    {
+      cout<<"Error syntax"<<endl;
+      return false;
+    }
+  }
+  else
+  {
+    cout<<"Error syntax"<<endl;
+    return false;
+  }
+}
+
+bool RE(linklist **start)
+{
+
+   linklist *curr = *start;
+  if(curr->cp=="const" || curr->cp=="(" || curr->cp=="!" || curr->cp=="ID")
+  {
+    if(PE(&curr))
+    {
+      if(REE(&curr))
+      {
+        return true;
+      }
+      else
+      {
+        cout<<"Error syntax"<<endl;
+        return false;
+      }
+    }
+    else
+    {
+      cout<<"Error syntax"<<endl;
+      return false;
+    }
+  }
+  else
+  {
+    cout<<"Error syntax"<<endl;
+    return false;
+  }
+}
+
+bool PE(linklist **start)
+{
+
+   linklist *curr = *start;
+  if(curr->cp=="const" || curr->cp=="(" || curr->cp=="!" || curr->cp=="ID")
+  {
+    if(ME(&curr))
+    {
+      if(PEE(&curr))
+      {
+        return true;
+      }
+      else
+      {
+        cout<<"Error syntax"<<endl;
+        return false;
+      }
+    }
+    else
+    {
+      cout<<"Error syntax"<<endl;
+      return false;
+    }
+  }
+  else
+  {
+    cout<<"Error syntax"<<endl;
+    return false;
+  }
+}
+
+bool ME(linklist **start)
+{
+
+   linklist *curr = *start;
+  if(curr->cp=="const" || curr->cp=="(" || curr->cp=="!" || curr->cp=="ID")
+  {
+    if(F(&curr))
+    {
+      if(MEE(&curr))
+      {
+        return true;
+      }
+      else
+      {
+        cout<<"Error syntax"<<endl;
+        return false;
+      }
+    }
+    else
+    {
+      cout<<"Error syntax"<<endl;
+      return false;
+    }
+  }
+  else
+  {
+    cout<<"Error syntax"<<endl;
+    return false;
+  }
+}
+
+bool F(linklist **start)
+{
+
+   linklist *curr = *start;
+  if(curr->cp=="const" || curr->cp=="(" || curr->cp=="!" || curr->cp=="ID")
+  {
+    if(curr->cp=="const")
+    {
+      curr=curr->next;
+      if(F(&curr))
+      {
+        return true;
+      }
+      else
+      {
+        cout<<"Error syntax"<<endl;
+        return false;
+      }
+    }
+    else if (curr->cp=="(")
+    {
+      curr=curr->next;
+      if(OE(&curr))
+      {
+        if(curr->cp==")")
+        {
+          curr=curr->next;
+          if(F(&curr))
+          {
+            return true;
+          }
+        }
+        
+      }
+      
+    }
+
+    else if(curr->cp == "!")
+    {
+      curr=curr->next;
+      if(PE(&curr))
+      {
+        if(F(&curr))
+        {
+          return true;
+        }
+      }
+    }
+
+    else if(curr->cp == "ID")
+    {
+      curr=curr->next;
+      if(XOE1(&curr))
+      {
+        if(F(&curr))
+        {
+          return true;
+        }
+      }
+    }
+    
+    else
+    {
+      cout<<"Error syntax"<<endl;
+      return false;
+    }
+  }
+}
+
+bool XOE1(linklist **start)
+{
+  linklist *curr = *start;
+
+  if(curr->cp=="[" || curr->cp=="const" || curr->cp=="(" || curr->cp=="!" || curr->cp=="ID")
+  {
+     if(fn_call(&curr))
+     {
+       return true;
+     }
+     else if(array(&curr))
+     
+     {
+         if(nt2(&curr))
+         {
+           if(curr->cp=="inc_dec")
+           {
+             curr=curr->next;
+           return true;
+           }
+           else
+           {
+             cout<<"Error syntax"<<endl;
+             return false;
+           }
+           
+
+         }
+         else
+         {
+           cout<<"Error syntax"<<endl;
+           return false;
+         }
+         
+     }
+     else{
+       return true;
+     }
+  }
+  else{
+    cout<<"Error syntax"<<endl;
+    return false;
+  }
+
+}
+
+
+bool nt2(linklist **start)
+{
+  linklist *curr = *start;
+  if(curr->cp=="."||curr->cp=="inc_dec")
+  {
+    if(curr->cp==".")
+    {
+      curr=curr->next;
+      if(curr->cp=="ID")
+      {
+        curr=curr->next;
+        if(array(&curr))
+        {
+          if(nt2(&curr))
+          {
+            return true;
+          }
+           else{
+    cout<<"Error syntax"<<endl;
+    return false;
+  }
+        }
+         else{
+    cout<<"Error syntax"<<endl;
+    return false;
+  }
+      }
+       else{
+    cout<<"Error syntax"<<endl;
+    return false;
+  }
+    }
+    else{
+      return true;
+    }
+  }
+   else{
+      cout<<"Error syntax"<<endl;
+      return false;
+    }
+  
+}
+
+bool AEE(linklist **start)
+{
+  linklist *curr = *start;
+  if(curr->cp=="&&"||curr->cp==","||curr->cp==")")
+  {
+    if(curr->cp=="&&")
+    {
+      curr=curr->next;
+      if(RE(&curr))
+      {
+        if (AEE(&curr))
+        {
+          return true;
+        }
+        else {
+          cout<<"Error syntax"<<endl;
+          return false;
+        }
+        
+      }
+    }
+    else {
+      return true;
+    }
+  }
+  else{
+    cout<<"Error syntax"<<endl;
+    return false;
+  }
+}
+bool PEE(linklist **start)
+{
+  linklist *curr = *start;
+  if(curr->cp=="PM"||curr->cp==","||curr->cp==")")
+  {
+    if(curr->cp=="PM")
+    {
+      curr=curr->next;
+      if(ME(&curr))
+      {
+        if (PEE(&curr))
+        {
+          return true;
+        }
+        else {
+          cout<<"Error syntax"<<endl;
+          return false;
+        }
+        
+      }
+    }
+    else {
+      return true;
+    }
+  }
+  else{
+    cout<<"Error syntax"<<endl;
+    return false;
+  }
+}
+bool MEE(linklist **start)
+{
+  linklist *curr = *start;
+  if(curr->cp=="MDM"||curr->cp==","||curr->cp==")")
+  {
+    if(curr->cp=="MDM")
+    {
+      curr=curr->next;
+      if(F(&curr))
+      {
+        if (MEE(&curr))
+        {
+          return true;
+        }
+        else {
+          cout<<"Error syntax"<<endl;
+          return false;
+        }
+        
+      }
+    }
+    else {
+      return true;
+    }
+  }
+  else{
+    cout<<"Error syntax"<<endl;
+    return false;
+  }
+}
+bool REE(linklist **start)
+{
+  linklist *curr = *start;
+  if(curr->cp=="ROP"||curr->cp==","||curr->cp==")")
+  {
+    if(curr->cp=="ROP")
+    {
+      curr=curr->next;
+      if(PE(&curr))
+      {
+        if (REE(&curr))
+        {
+          return true;
+        }
+        else {
+          cout<<"Error syntax"<<endl;
+          return false;
+        }
+        
+      }
+    }
+    else {
+      return true;
+    }
+  }
+  else{
+    cout<<"Error syntax"<<endl;
     return false;
   }
 }
