@@ -1,12 +1,1 @@
-void main()
-{
-int b;
-if(b>a)
-{
-  int a;
-}
-else
-{
-  float b;
-}
-}$
+$
