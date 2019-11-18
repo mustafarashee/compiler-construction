@@ -426,8 +426,7 @@ public:
   bool word()
   {
     
-
-    if ((*curr)->cp == "virtual"  || (*curr)->cp == "static" || (*curr)->cp == "intconst"   || (*curr)->cp == "boolconst"  || (*curr)->cp == "floatconst" || (*curr)->cp == "Charconst" (*curr)->cp == "stringconst")
+    if ((*curr)->cp == "virtual"  || (*curr)->cp == "static" || (*curr)->cp == "const")
     {
       (*curr) = (*curr)->next;
       return true;
@@ -640,8 +639,8 @@ public:
   bool X()
   {
     
-    if ((*curr)->cp == "[" || (*curr)->cp == "=" || (*curr)->cp == ";" || (*curr)->cp == "(" || (*curr)->cp == ",")
-    {
+    // if ((*curr)->cp == "[" || (*curr)->cp == "=" || (*curr)->cp == ";" || (*curr)->cp == "(" || (*curr)->cp == ",")
+
       if (obj_dec())
       {
         return true;
@@ -664,19 +663,13 @@ public:
         // cout << "Error syntax at: " << (*curr)->cp << endl;
         return false;
       }
-    }
-    else
-    {
-      // cout << "Error syntax at: " << (*curr)->cp << endl;
-      return false;
-    }
   }
 
   bool terminal()
   {
     
-    if ((*curr)->cp == "[" || (*curr)->cp == "=" || (*curr)->cp == ";" || (*curr)->cp == "(" || (*curr)->cp == ",")
-    {
+   // if ((*curr)->cp == "[" || (*curr)->cp == "=" || (*curr)->cp == ";" || (*curr)->cp == "(" || (*curr)->cp == ",")
+
       if (fun_dec())
       {
         return true;
@@ -690,18 +683,14 @@ public:
         // cout << "Error syntax at: " << (*curr)->cp << endl;
         return false;
       }
-    }
-    else
-    {
-      // cout << "Error syntax at: " << (*curr)->cp << endl;
-      return false;
-    }
   }
+
+
   bool defs2()
   {
     
-    if ((*curr)->cp == "[" || (*curr)->cp == "=" || (*curr)->cp == ";" || (*curr)->cp == "(" || (*curr)->cp == ",")
-    {
+    // if ((*curr)->cp == "[" || (*curr)->cp == "=" || (*curr)->cp == ";" || (*curr)->cp == "(" || (*curr)->cp == ",")
+     //{
 
       if (dt_dec())
       {
@@ -725,18 +714,15 @@ public:
         // cout << "Error syntax at: " << (*curr)->cp << endl;
         return false;
       }
-    }
-    else
-    {
-      // cout << "Error syntax at: " << (*curr)->cp << endl;
-      return false;
-    }
   }
+
+
   bool type()
   {
     
-    if ((*curr)->cp == "ID" || (*curr)->cp == "DT")
-    {
+    // if ((*curr)->cp == "ID" || (*curr)->cp == "DT")
+    // {
+
       if ((*curr)->cp == "ID")
       {
         (*curr) = (*curr)->next;
@@ -751,6 +737,7 @@ public:
           return false;
         }
       }
+
       else if ((*curr)->cp == "DT")
       {
         (*curr) = (*curr)->next;
@@ -765,24 +752,20 @@ public:
           return false;
         }
       }
+
       else
       {
         // cout << "Error syntax at: " << (*curr)->cp << endl;
         return false;
       }
-    }
-    else
-    {
-      // cout << "Error syntax at: " << (*curr)->cp << endl;
-      return false;
-    }
   }
 
   bool fun_dec()
   {
     
-    if ((*curr)->cp == "ID" || (*curr)->cp == "DT" || (*curr)->cp == "void" || (*curr)->cp == ")")
-    {
+    //if ((*curr)->cp == "ID" || (*curr)->cp == "DT" || (*curr)->cp == "void" || (*curr)->cp == ")")
+    //{
+
       if (para())
       {
         if ((*curr)->cp == ")")
@@ -820,7 +803,7 @@ public:
           //}
           // else
           // {
-            cout << "Error syntax at: " << (*curr)->cp << endl;
+            //cout << "Error syntax at: " << (*curr)->cp << endl;
           //   return false;
           // }
         }
@@ -830,21 +813,16 @@ public:
           return false;
         }
       }
+
       else
       {
         // cout << "Error syntax at: " << (*curr)->cp << endl;
         return false;
       }
-    }
-    else
-    {
-      // cout << "Error syntax at: " << (*curr)->cp << endl;
-      return false;
-    }
   }
 
 
-  bool inherit()
+  bool inherit() //not inculuded 
   {
     
     if ((*curr)->cp == ":")
@@ -875,11 +853,14 @@ public:
       return false;
     }
   }
+
+
   bool def()
   {
     
-    if ((*curr)->cp == "ID" || (*curr)->cp == "DT")
-    {
+    // if ((*curr)->cp == "ID" || (*curr)->cp == "DT")
+    // {
+
       if ((*curr)->cp == "ID")
       {
         (*curr) = (*curr)->next;
@@ -908,22 +889,20 @@ public:
           return false;
         }
       }
-    }
-    else
-    {
-      // cout << "Error syntax at: " << (*curr)->cp << endl;
-      return false;
-    }
+      else
+      {
+        return false;
+      }
+
   }
+
+
   bool check_inh()
   {
-    
-    
-    {
       if ((*curr)->cp == ":")
       {
         (*curr) = (*curr)->next;
-        if ((*curr)->cp == "public")
+        if ((*curr)->cp == "public" || (*curr)->cp == "private")
         {
           (*curr) = (*curr)->next;
           if ((*curr)->cp == "ID")
@@ -933,22 +912,26 @@ public:
           }
         }
       }
+
       else if( (*curr)->cp == "{")
       {
         return true;
       }
-    }
-    //else
-    //{
+
+    else
+    {
       // cout << "Error syntax at: " << (*curr)->cp << endl;
       return false;
-   // }
+   }
+
   }
+
+
   bool para()
   {
     
-    if ((*curr)->cp == "ID" || (*curr)->cp == "DT" || (*curr)->cp == "void" || (*curr)->cp == ")")
-    {
+  //  if ((*curr)->cp == "ID" || (*curr)->cp == "DT" || (*curr)->cp == "void" || (*curr)->cp == ")")
+
       if (def())
       {
         if (E())
@@ -961,27 +944,29 @@ public:
           return false;
         }
       }
+
       else if ((*curr)->cp == "void")
       {
         (*curr) = (*curr)->next;
         return true;
       }
-      else
+
+      else if((*curr)->cp == ")")
       {
         return true;
       }
-    }
-    else
-    {
-      // cout << "Error syntax at: " << (*curr)->cp << endl;
-      return false;
-    }
+      else
+      {
+        return false;
+      }
   }
+
+
   bool E()
   {
     
-    if ((*curr)->cp == "," || (*curr)->cp == ")")
-    {
+   // if ((*curr)->cp == "," || (*curr)->cp == ")")
+
       if ((*curr)->cp == ",")
       {
         (*curr) = (*curr)->next;
@@ -993,23 +978,23 @@ public:
           }
         }
       }
-      else
+      else if((*curr)->cp == ")")
       {
         return true;
       }
-    }
-    else
-    {
-      // cout << "Error syntax at: " << (*curr)->cp << endl;
-      return false;
-    }
+
+      else
+      {
+        return false;
+      }
+
   }
 
   bool MST()
   {
     
-    if ((*curr)->cp == "if" || (*curr)->cp == "while" || (*curr)->cp == "switch" || (*curr)->cp == "for" || (*curr)->cp == "return" || (*curr)->cp == "continue" || (*curr)->cp == "break" || (*curr)->cp == "ID" || (*curr)->cp == "DT" || (*curr)->cp == "}")
-    {
+  //  if ((*curr)->cp == "if" || (*curr)->cp == "while" || (*curr)->cp == "switch" || (*curr)->cp == "for" || (*curr)->cp == "return" || (*curr)->cp == "continue" || (*curr)->cp == "break" || (*curr)->cp == "ID" || (*curr)->cp == "DT" || (*curr)->cp == "}")
+
       if (SST())
       {
         if (MST())
@@ -1021,7 +1006,6 @@ public:
       {
         return true;
       }
-    }
     else
     {
       // cout << "Error syntax at: " << (*curr)->cp << endl;
@@ -1032,8 +1016,9 @@ public:
   bool SST()
   {
     
-    if ((*curr)->cp == "if" || (*curr)->cp == "while" || (*curr)->cp == "switch" || (*curr)->cp == "for" || (*curr)->cp == "return" || (*curr)->cp == "continue" || (*curr)->cp == "break" || (*curr)->cp == "ID" || (*curr)->cp == "DT")
-    {
+    // if ((*curr)->cp == "if" || (*curr)->cp == "while" || (*curr)->cp == "switch" || (*curr)->cp == "for" || (*curr)->cp == "return" || (*curr)->cp == "continue" || (*curr)->cp == "break" || (*curr)->cp == "ID" || (*curr)->cp == "DT")
+
+
       if (if_else())
       {
         return true;
@@ -1119,18 +1104,20 @@ public:
           return false;
         }
       }
-    }
+
     else
     {
       // cout << "Error syntax at: " << (*curr)->cp << endl;
       return false;
     }
   }
+
+
   bool dt_dec()
   {
     
-    if ((*curr)->cp == "[" || (*curr)->cp == "AOP" || (*curr)->cp == "," || (*curr)->cp == ";")
-    {
+   // if ((*curr)->cp == "[" || (*curr)->cp == "AOP" || (*curr)->cp == "," || (*curr)->cp == ";")
+
       if (new_array())
       {
         return true;
@@ -1144,13 +1131,9 @@ public:
         // cout << "Error syntax at: " << (*curr)->cp << endl;
         return false;
       }
-    }
-    else
-    {
-      // cout << "Error syntax at: " << (*curr)->cp << endl;
-      return false;
-    }
   }
+
+  
   bool new_array()
   {
     
@@ -1190,11 +1173,11 @@ public:
       return false;
     }
   }
+
+
   bool array2()
   {
     
-    if ((*curr)->cp == "=" || (*curr)->cp == ";")
-    {
       if ((*curr)->cp == "=")
       {
         (*curr) = (*curr)->next;
@@ -1234,23 +1217,27 @@ public:
           return false;
         }
       }
+
       else if ((*curr)->cp == ";")
       {
         (*curr) = (*curr)->next;
         return true;
       }
-    }
+
     else
     {
       // cout << "Error syntax at: " << (*curr)->cp << endl;
       return false;
     }
+
   }
+
+
   bool array3()
   {
     
-    if ((*curr)->cp == "intconst" || (*curr)->cp == "ID" || (*curr)->cp == "(" || (*curr)->cp == "!")
-    {
+   // if ((*curr)->cp == "intconst" || (*curr)->cp == "ID" || (*curr)->cp == "(" || (*curr)->cp == "!")
+
       if (OE())
       {
         if (array4())
@@ -1263,23 +1250,20 @@ public:
           return false;
         }
       }
+
       else
       {
         // cout << "Error syntax at: " << (*curr)->cp << endl;
         return false;
       }
-    }
-    else
-    {
-      // cout << "Error syntax at: " << (*curr)->cp << endl;
-      return false;
-    }
   }
+
+
   bool array4()
   {
     
-    if ((*curr)->cp == "," || (*curr)->cp == "}")
-    {
+   // if ((*curr)->cp == "," || (*curr)->cp == "}")
+
       if ((*curr)->cp == ",")
       {
         (*curr) = (*curr)->next;
@@ -1301,22 +1285,22 @@ public:
           return false;
         }
       }
-      else
+      else if((*curr)->cp == "}")
       {
         return true;
       }
-    }
-    else
-    {
-      // cout << "Error syntax at: " << (*curr)->cp << endl;
-      return false;
-    }
+      else
+      {
+        return false;
+      }
   }
+
+
   bool init()
   {
     
-    if ((*curr)->cp == "AOP" || (*curr)->cp == "," || (*curr)->cp == ";")
-    {
+   // if ((*curr)->cp == "AOP" || (*curr)->cp == "," || (*curr)->cp == ";")
+
       if ((*curr)->cp == "AOP")
       {
         (*curr) = (*curr)->next;
@@ -1330,30 +1314,24 @@ public:
           return false;
         }
       }
-      else
-      {
-        if (list())
+
+      else if (list())
         {
           return true;
         }
+
         else
         {
           // cout << "Error syntax at: " << (*curr)->cp << endl;
           return false;
         }
-      }
-    }
-    else
-    {
-      // cout << "Error syntax at: " << (*curr)->cp << endl;
-      return false;
-    }
-  }
+
+ } 
+
   bool init2()
   {
     
-    if ((*curr)->cp == "intconst" || (*curr)->cp == "(" || (*curr)->cp == "ID" || (*curr)->cp == "!")
-    {
+  //  if ((*curr)->cp == "intconst" || (*curr)->cp == "(" || (*curr)->cp == "ID" || (*curr)->cp == "!")
       if (OE())
       {
         if ((*curr)->cp == ";")
@@ -1375,18 +1353,14 @@ public:
         // cout << "Error syntax at: " << (*curr)->cp << endl;
         return false;
       }
-    }
-    else
-    {
-      // cout << "Error syntax at: " << (*curr)->cp << endl;
-      return false;
-    }
   }
+
+
   bool init3()
   {
     
-    if ((*curr)->cp == "AOP" || (*curr)->cp == "," || (*curr)->cp == ";")
-    {
+    //if ((*curr)->cp == "AOP" || (*curr)->cp == "," || (*curr)->cp == ";")
+
       if ((*curr)->cp == "AOP")
       {
         (*curr) = (*curr)->next;
@@ -1400,22 +1374,25 @@ public:
           return false;
         }
       }
-      else
+
+      else if( (*curr)->cp == "," || (*curr)->cp == ";" )
       {
         return true;
       }
-    }
-    else
-    {
-      // cout << "Error syntax at: " << (*curr)->cp << endl;
-      return false;
-    }
+
+      else
+      {
+        return false;
+      }
+    
   }
+
+
   bool init4()
   {
     
-    if ((*curr)->cp == "ID" || (*curr)->cp == "intconst")
-    {
+   // if ((*curr)->cp == "ID" || (*curr)->cp == "intconst")
+   
       if ((*curr)->cp == "ID")
       {
         (*curr) = (*curr)->next;
@@ -1437,7 +1414,7 @@ public:
           return false;
         }
       }
-      else if ((*curr)->cp == "intconst")
+      else if ((*curr)->cp == "intconst" || (*curr)->cp == "floatconst" || (*curr)->cp == "boolconst" || (*curr)->cp == "stringconst" || (*curr)->cp == "Charconst")
       {
         (*curr) = (*curr)->next;
         if (list())
@@ -1455,18 +1432,14 @@ public:
         // cout << "Error syntax at: " << (*curr)->cp << endl;
         return false;
       }
-    }
-    else
-    {
-      // cout << "Error syntax at: " << (*curr)->cp << endl;
-      return false;
-    }
   }
+
+
   bool list()
   {
     
-    if ((*curr)->cp == "," || (*curr)->cp == ";")
-    {
+   // if ((*curr)->cp == "," || (*curr)->cp == ";")
+
       if ((*curr)->cp == ",")
       {
         (*curr) = (*curr)->next;
@@ -1491,13 +1464,19 @@ public:
             return false;
           }
         }
+           else
+          {
+            // cout << "Error syntax at: " << (*curr)->cp << endl;
+            return false;
+          }
       }
+
       else if ((*curr)->cp == ";")
       {
         (*curr) = (*curr)->next;
         return true;
       }
-    }
+
     else
     {
       // cout << "Error syntax at: " << (*curr)->cp << endl;
@@ -1509,8 +1488,8 @@ public:
   bool obj_dec()
   {
     
-    if ((*curr)->cp == "[" || (*curr)->cp == "=" || (*curr)->cp == "," || (*curr)->cp == ";")
-    {
+   // if ((*curr)->cp == "[" || (*curr)->cp == "=" || (*curr)->cp == "," || (*curr)->cp == ";")
+
       if (array())
       {
         if (new_init())
@@ -1531,24 +1510,19 @@ public:
           return false;
         }
       }
+
       else
       {
         // cout << "Error syntax at: " << (*curr)->cp << endl;
         return false;
       }
-    }
-    else
-    {
-      // cout << "Error syntax at: " << (*curr)->cp << endl;
-      return false;
-    }
   }
 
   bool new_init()
   {
     
-    if ((*curr)->cp == "ID" || (*curr)->cp == "," || (*curr)->cp == ";" || (*curr)->cp == "=")
-    {
+   // if ((*curr)->cp == "ID" || (*curr)->cp == "," || (*curr)->cp == ";" || (*curr)->cp == "=")
+  
       if ((*curr)->cp == "=")
       {
 
@@ -1571,22 +1545,24 @@ public:
           return true;
         }
       }
-      else
+
+      else if((*curr)->cp == "," || (*curr)->cp == ";")
       {
         return true;
       }
-    }
+
     else
     {
       // cout << "Error syntax at: " << (*curr)->cp << endl;
       return false;
     }
   }
+
+
   bool list2()
   {
     
-    if ((*curr)->cp == "," || (*curr)->cp == ";")
-    {
+   // if ((*curr)->cp == "," || (*curr)->cp == ";")
 
       if ((*curr)->cp == ",")
       {
@@ -1626,12 +1602,12 @@ public:
           return false;
         }
       }
+      
       else if ((*curr)->cp == ";")
       {
         (*curr) = (*curr)->next;
         return true;
       }
-    }
     else
     {
       // cout << "Error syntax at: " << (*curr)->cp << endl;
@@ -1642,14 +1618,14 @@ public:
   bool array()
   {
     
-    if ((*curr)->cp == "[" || (*curr)->cp == "." || (*curr)->cp == "(" || (*curr)->cp == "uniary" || (*curr)->cp == "AOP" || (*curr)->cp == ";" )
-    {
+   //  if ((*curr)->cp == "[" || (*curr)->cp == "." || (*curr)->cp == "(" || (*curr)->cp == "uniary" || (*curr)->cp == "AOP" || (*curr)->cp == ";" )
+    
       if ((*curr)->cp == "[")
       {
         (*curr) = (*curr)->next;
         if (OE())
         {
-          (*curr) = (*curr)->next;
+          (*curr) = (*curr)->next;  //check krna pary ga yhan pay
           if ((*curr)->cp == "]")
           {
             (*curr) = (*curr)->next;
@@ -1667,22 +1643,24 @@ public:
           return false;
         }
       }
-      else
+
+      else if( (*curr)->cp == "." || (*curr)->cp == "(" || (*curr)->cp == "uniary" || (*curr)->cp == "AOP" || (*curr)->cp == ";" )
       {
         return true;
       }
-    }
+
     else
     {
       // cout << "Error syntax at: " << (*curr)->cp << endl;
       return false;
     }
   }
+
+
   bool ass_st()
   {
-    
-    if ((*curr)->cp == "AOP")
-    {
+    //if ((*curr)->cp == "AOP")
+
       if (ass_st1())
       {
         if (XX())
@@ -1700,13 +1678,9 @@ public:
         // cout << "Error syntax at: " << (*curr)->cp << endl;
         return false;
       }
-    }
-    else
-    {
-      // cout << "Error syntax at: " << (*curr)->cp << endl;
-      return false;
-    }
   }
+
+  
   bool ass_st1()
   {
     
