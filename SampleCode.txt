@@ -1,1 +1,25 @@
-$
+class point
+{
+  private:
+  point(int a)
+  {
+    point p;
+  }
+  point p (int a , int b)
+  {
+
+  }
+  
+};
+void main ()
+{
+  int a;
+  if(a+b)
+  {
+    while(1)
+    {
+
+    }
+    int b;
+  }
+}$

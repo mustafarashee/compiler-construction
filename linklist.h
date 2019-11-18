@@ -491,15 +491,15 @@ public:
               if ((*curr)->cp == "}")
               {
                 (*curr) = (*curr)->next;
-                if((*curr)->cp == ";")
-                {
-                  (*curr) = (*curr)->next;
-                  return true;
-                }
-                else
-                {
-                  return false;
-                }
+                // if((*curr)->cp == ";")
+                // {
+                //   (*curr) = (*curr)->next;
+                   return true;
+                // }
+                // else
+                // {
+                //   return false;
+                // }
                  
               }
               else
@@ -2927,12 +2927,6 @@ public:
          (*curr) = (*curr)->next;
           return true;
       }
-      else
-      {
-        //cout << "Error syntax at: " << (*curr)->cp << endl;
-        return false;
-      }
-      
       else if ((*curr)->cp == "(")
       {
         (*curr) = (*curr)->next;
