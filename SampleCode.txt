@@ -1,21 +1,28 @@
-
 class point
 {
   private:
   point(int a)
   {
     point p;
-    int a[5] ;
+    
   }
+  
   point p (int a , int b)
   {
     for(i=0;i<5;i++)
     {
-    
+      if(3)
+      {
+
+      }
+      else
+      {
+        
+      }
     }
-  }
-  
+  } 
 };
+
 point p (int a , int b)
   {
     for(i=0;i<5;i++)
@@ -23,6 +30,7 @@ point p (int a , int b)
     
     }
   }
+  
 void main()
 {
   a=a.b.c.d();

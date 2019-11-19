@@ -1644,7 +1644,7 @@ public:
         }
       }
 
-      else if( (*curr)->cp == "." || (*curr)->cp == "(" || (*curr)->cp == "uniary" || (*curr)->cp == "AOP"  )  //|| (*curr)->cp == ";"
+      else if( (*curr)->cp == "." || (*curr)->cp == "(" || (*curr)->cp == "uniary" || (*curr)->cp == "AOP" || (*curr)->cp == ";" || (*curr)->cp == "," )  //|| (*curr)->cp == ";"
       {
         return true;
       }
