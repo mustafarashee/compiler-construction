@@ -7,6 +7,6 @@ int main()
 {
   WordBreak letter;
   letter.Letter();
-  cout <<""<<endl;
+  cout << "" << endl;
   system("pause");
 }

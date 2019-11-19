@@ -1644,7 +1644,7 @@ public:
         }
       }
 
-      else if( (*curr)->cp == "." || (*curr)->cp == "(" || (*curr)->cp == "uniary" || (*curr)->cp == "AOP" || (*curr)->cp == ";" )
+      else if( (*curr)->cp == "." || (*curr)->cp == "(" || (*curr)->cp == "uniary" || (*curr)->cp == "AOP"  )  //|| (*curr)->cp == ";"
       {
         return true;
       }
@@ -1665,7 +1665,16 @@ public:
       {
         if (XX())
         {
-          return true;
+          if((*curr)->cp == ";")
+          {
+            (*curr) = (*curr)->next;
+            return true;
+          }
+          else
+          {
+            return false;
+          }
+          
         }
         else
         {
@@ -1725,7 +1734,6 @@ public:
       }
       else if ((*curr)->cp == ";")
       {
-        (*curr) = (*curr)->next;
         return true;
       }
       else
@@ -2082,7 +2090,15 @@ public:
       (*curr) = (*curr)->next;
       if (OE1())
       {
-        return true;
+        if((*curr)->cp == ";")
+        {
+          (*curr) = (*curr)->next;
+          return true;
+        }
+        else
+        {
+          return false;
+        }
       }
       else
       {
@@ -3014,7 +3030,7 @@ public:
           return false;
         }
       }
-      else if( (*curr)->cp == "," || (*curr)->cp == ")"||(*curr)->cp == ";"||(*curr)->cp == "}"||(*curr)->cp == "AOP"||(*curr)->cp == "]"||(*curr)->cp == ":"  ||(*curr)->cp == "||" ||(*curr)->cp == "&&" ||(*curr)->cp == "ROP" ||(*curr)->cp == "MDM" ||(*curr)->cp == "PM" )
+      else if( (*curr)->cp == "," || (*curr)->cp == ")"|| (*curr)->cp == ";" ||(*curr)->cp == "}"||(*curr)->cp == "AOP"||(*curr)->cp == "]"||(*curr)->cp == ":"  ||(*curr)->cp == "||" ||(*curr)->cp == "&&" ||(*curr)->cp == "ROP" ||(*curr)->cp == "MDM" ||(*curr)->cp == "PM" )
       {
         return true;
       }

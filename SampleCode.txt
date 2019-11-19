@@ -1,3 +1,4 @@
+
 class point
 {
   private:
@@ -22,16 +23,7 @@ point p (int a , int b)
     
     }
   }
-
-void main ()
+void main()
 {
-  int a;
-  if(a+b)
-  {
-    while(1)
-    {
-      print(5,a);
-    }
-    int b;
-  }
+  a=a.b.c.d();
 }$
